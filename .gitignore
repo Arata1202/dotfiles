@@ -1,0 +1,10 @@
+### all ignore ###
+/*
+/.**
+
+### not ignore ###
+!/.zshrc
+!/.zshenv
+
+!.gitignore
+!.gitignore_global
