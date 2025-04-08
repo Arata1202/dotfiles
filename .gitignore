@@ -3,8 +3,9 @@
 /.**
 
 ### not ignore ###
-!/.zshrc
-!/.zshenv
+!.zshrc
+!.zshenv
+!.zprofile
 
 !.gitignore
 !.gitignore_global

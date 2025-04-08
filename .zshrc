@@ -55,6 +55,3 @@ alias prt='pnpm run test'
 
 # python
 alias py='python3'
-
-[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code-insiders --locate-shell-integration-path zsh)"
-[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
