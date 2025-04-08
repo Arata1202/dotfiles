@@ -1,0 +1,56 @@
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = -v:refname
+[init]
+	defaultBranch = master
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[push]
+	default = simple
+	autoSetupRemote = true
+	followTags = true
+[fetch]
+	prune = true
+	all = true
+[help]
+	autocorrect = prompt
+[commit]
+  	verbose = true
+[rerere]
+  	enabled = true
+  	autoupdate = true
+[core]
+	excludesfile = ~/.gitignore_global
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
+[core]
+	editor = vi
+	autocrlf = input
+	fsmonitor = true
+	untrackedCache = true
+[merge]
+	conflictstyle = zdiff3
+[pull]
+	rebase = true
+[color]
+	ui = auto
+[alias]
+	co = checkout
+	br = branch
+	ss = status -s
+	difff = diff --name-only
+	diffs = diff --cached
+	lg = log --graph --pretty=format:'%Cred%h%Creset - %s%C(yellow)%d%Creset %Cgreen(%cr:%cd) %C(bold blue)<%an>%Creset' --abbrev-commit --date=iso
+	rb = rebase
+	sh = show
+	st = stash
+	unstage = reset HEAD
+	history = !git --no-pager reflog | awk '$3 == \"checkout:\" && /moving from/ {print $8}' | awk '!a[$0]++' | head | peco | xargs git switch

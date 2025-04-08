@@ -10,3 +10,5 @@
 !.gitignore_global
 
 !.vimrc
+
+!.gitconfig_shared
