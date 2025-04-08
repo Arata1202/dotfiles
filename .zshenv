@@ -6,8 +6,16 @@ export PATH="/opt/homebrew/opt/php@8.0/bin:/opt/homebrew/opt/php@8.0/sbin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/php@8.0/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/php@8.0/include"
 
-# Ruby / Git / Go / Flutter
-export PATH="/usr/local/opt/ruby/bin:/usr/local/opt/git/bin:/usr/local/opt/go/bin:$PATH"
+# Git
+export PATH="/usr/local/opt/git/bin:$PATH"
+
+# Ruby
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+# Go
+export PATH="/usr/local/opt/go/bin:$PATH"
+
+# Flutter
 export PATH="$HOME/flutter/bin:$PATH"
 
 # Docker
