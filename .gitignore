@@ -3,6 +3,9 @@
 /.**
 
 ### not ignore ###
+!/.bin/
+!/.bin/**
+
 !.zshrc
 !.zshenv
 !.zprofile
