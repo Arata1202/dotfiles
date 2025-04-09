@@ -26,16 +26,15 @@
   	enabled = true
   	autoupdate = true
 [core]
+	editor = vi
+	autocrlf = input
 	excludesfile = ~/.gitignore_global
+	fsmonitor = true
+	untrackedCache = true
 [rebase]
 	autoSquash = true
 	autoStash = true
 	updateRefs = true
-[core]
-	editor = vi
-	autocrlf = input
-	fsmonitor = true
-	untrackedCache = true
 [merge]
 	conflictstyle = zdiff3
 [pull]
