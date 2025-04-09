@@ -6,8 +6,10 @@
 !.gitignore
 !LICENSE
 !setup.sh
-!brew.sh
+!brew-init.sh
 !link.sh
+!replace-git.sh
+!replace-zsh.sh
 
 !git/
 !.gitignore_global
