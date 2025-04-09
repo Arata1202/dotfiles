@@ -10,6 +10,7 @@
 !link.sh
 !replace-git.sh
 !replace-zsh.sh
+!unlink.sh
 
 !git/
 !.gitignore_global
