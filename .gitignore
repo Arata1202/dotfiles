@@ -3,16 +3,19 @@
 /.**
 
 ### not ignore ###
-!/.bin/
-!/.bin/**
+!.gitignore
+!LICENSE
+!link.sh
 
+!git/
+!.gitignore_global
+!.gitconfig_shared
+
+!vim/
+!.vimrc
+
+!zsh/
 !.zshrc
 !.zshenv
 !.zprofile
 
-!.gitignore
-!.gitignore_global
-
-!.vimrc
-
-!.gitconfig_shared
