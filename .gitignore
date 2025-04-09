@@ -5,6 +5,7 @@
 ### not ignore ###
 !.gitignore
 !LICENSE
+!.bin/
 !setup.sh
 !brew-init.sh
 !link.sh

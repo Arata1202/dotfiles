@@ -1,7 +1,7 @@
 echo "セットアップを開始します"
 
 # dotfilesのシンボリックリンクを作成する
-source ~/dotfiles/link.sh
+source ~/dotfiles/.bin/link.sh
 
 # homebrewがインストールされていない場合はインストール
 if ! type brew >/dev/null 2>&1; then
@@ -12,13 +12,13 @@ else
 fi
 
 # Brewfileに記載されているパッケージをインストール
-source ~/dotfiles/brew-init.sh
+source ~/dotfiles/.bin/brew-init.sh
 
 # zshをbrewのものに置き換え
-source ~/dotfiles/replace-zsh.sh
+source ~/dotfiles/.bin/replace-zsh.sh
 
 # gitをbrewのものに置き換え
-source ~/dotfiles/replace-git.sh
+source ~/dotfiles/.bin/replace-git.sh
 
 echo "セットアップが完了しました"
 echo "ターミナルを再起動してください。"
