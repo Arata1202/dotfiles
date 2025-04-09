@@ -5,11 +5,16 @@
 ### not ignore ###
 !.gitignore
 !LICENSE
+!setup.sh
+!brew.sh
 !link.sh
 
 !git/
 !.gitignore_global
 !.gitconfig_shared
+
+!homebrew/
+!.Brewfile
 
 !vim/
 !.vimrc

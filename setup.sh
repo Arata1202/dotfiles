@@ -1,0 +1,2 @@
+./link.sh
+./brew.sh
