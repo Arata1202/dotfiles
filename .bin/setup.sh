@@ -12,13 +12,10 @@ else
 fi
 
 # Brewfileに記載されているパッケージをインストール
-source ~/dotfiles/.bin/brew-init.sh
+source ~/dotfiles/.bin/brew.sh
 
 # zshをbrewのものに置き換え
-source ~/dotfiles/.bin/replace-zsh.sh
-
-# gitをbrewのものに置き換え
-source ~/dotfiles/.bin/replace-git.sh
+source ~/dotfiles/.bin/zsh.sh
 
 echo "セットアップが完了しました"
 echo "ターミナルを再起動してください。"

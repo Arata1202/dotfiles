@@ -7,10 +7,9 @@
 !LICENSE
 !.bin/
 !setup.sh
-!brew-init.sh
+!brew.sh
 !link.sh
-!replace-git.sh
-!replace-zsh.sh
+!zsh.sh
 !unlink.sh
 
 !git/
