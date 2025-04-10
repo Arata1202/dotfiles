@@ -1,7 +1,5 @@
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# Git / Docker / Go
 export PATH="/opt/homebrew/bin:$PATH"
 
 # PHP
