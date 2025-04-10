@@ -18,7 +18,7 @@ export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 
 # Go
-export PATH="/usr/local/opt/go/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$PATH:$(go env GOPATH)/bin"
 
 # Rust
