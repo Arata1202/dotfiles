@@ -19,11 +19,11 @@ else
     echo "Homebrewでインストールされたgitをデフォルトに設定します..."
 
     # ~/.zshrc にパスを追加
-    SHELL_PATH_FILE="$HOME/dotfiles/zsh/sync/path.zsh"
+    SHELL_PATH_FILE="$HOME/dotfiles/zsh/.zprofile"
     echo "export PATH=\"$GIT_PATH:\$PATH\"" >>"$SHELL_PATH_FILE"
 
     # 再読み込み
-    source "$HOME"/.zshrc
+    source "$HOME"/.zprofile
 
     echo "Homebrewでインストールされたgitがデフォルトに設定されました。"
     echo "新しいターミナルセッションを開くと、設定が反映されます。"
