@@ -12,7 +12,7 @@ export LDFLAGS="-L/opt/homebrew/opt/php@8.0/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/php@8.0/include"
 
 # Git
-export PATH="/opt/homebrew/bin/git:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
 
 # Ruby
 export PATH="/usr/local/opt/ruby/bin:$PATH"
