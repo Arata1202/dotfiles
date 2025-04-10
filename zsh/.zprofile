@@ -1,36 +1,27 @@
-export PATH="/usr/local/bin:$PATH"
-
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# Docker
-export PATH="$HOME/.docker/bin:$PATH"
+# Git / Docker / Go
+export PATH="/opt/homebrew/bin:$PATH"
 
 # PHP
-export PATH="/opt/homebrew/opt/php@8.0/bin:/opt/homebrew/opt/php@8.0/sbin:$PATH"
-export LDFLAGS="-L/opt/homebrew/opt/php@8.0/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/php@8.0/include"
-
-# Git
-export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/opt/php@8.1/bin:/opt/homebrew/opt/php@8.1/sbin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/php@8.1/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/php@8.1/include"
 
 # Ruby
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-
-# Go
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="$PATH:$(go env GOPATH)/bin"
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
 # Rust
-[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # Flutter
 export PATH="$HOME/flutter/bin:$PATH"
 
 # Android
 export ANDROID_HOME="$HOME/Library/Android/sdk"
-export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
-export PATH="$PATH:$ANDROID_HOME/platform-tools"
+export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+export PATH="$ANDROID_HOME/platform-tools:$PATH"
 
 # Orbstack
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
