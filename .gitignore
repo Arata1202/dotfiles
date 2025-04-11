@@ -22,6 +22,9 @@
 !vim/
 !.vimrc
 
+!vscode/
+!settings.json
+!keybindings.json
+
 !zsh/
 !.zshrc
-
