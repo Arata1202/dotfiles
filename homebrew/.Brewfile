@@ -1,6 +1,5 @@
 brew "ruby"
 brew "cocoapods"
-brew "php", link: false
 brew "composer"
 brew "docker"
 brew "gh"
@@ -11,7 +10,7 @@ brew "gitleaks"
 brew "go"
 brew "node"
 brew "peco"
-brew "php@8.1", link: true
+brew "php@8.1"
 brew "rustup"
 brew "terraform"
 brew "tree"
