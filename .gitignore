@@ -7,7 +7,9 @@
 !LICENSE
 
 !.bin/
-!install.sh
+!link.sh
+!brew.sh
+!zsh.sh
 
 !git/
 !.gitignore_global
