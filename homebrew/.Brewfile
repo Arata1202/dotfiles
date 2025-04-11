@@ -1,6 +1,6 @@
 brew "ruby"
 brew "cocoapods"
-brew "php"
+brew "php", link:false
 brew "composer"
 brew "docker"
 brew "gh"

@@ -2,7 +2,9 @@ chmod:
 	@chmod +x .bin/*.sh
 
 all:
-	brew link zsh
+	.bin/brew.sh
+	.bin/link.sh
+	.bin/zsh.sh
 
 brew:
 	.bin/brew.sh
