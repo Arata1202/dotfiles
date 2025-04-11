@@ -1,0 +1,13 @@
+name: MacOS
+on:
+  push:
+    branches: master
+jobs:
+  MacOS-Test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Tests
+        run: |
+          make chmod
+          make -j all

@@ -13,6 +13,10 @@
 !update.sh
 !zsh.sh
 
+!.github/
+!workflows/
+!macos.yml
+
 !git/
 !.gitignore_global
 !.gitconfig_shared
