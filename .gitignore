@@ -13,6 +13,9 @@
 !.gitignore_global
 !.gitconfig_shared
 
+!homebrew/
+!Brewfile
+
 !vim/
 !.vimrc
 
