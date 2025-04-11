@@ -5,25 +5,17 @@
 ### not ignore ###
 !.gitignore
 !LICENSE
+
 !.bin/
-!setup.sh
-!brew.sh
-!link.sh
-!zsh.sh
-!unlink.sh
+!install.sh
 
 !git/
 !.gitignore_global
 !.gitconfig_shared
-
-!homebrew/
-!.Brewfile
 
 !vim/
 !.vimrc
 
 !zsh/
 !.zshrc
-!.zshenv
-!.zprofile
 
