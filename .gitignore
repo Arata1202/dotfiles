@@ -6,6 +6,7 @@
 !.gitignore
 !LICENSE
 !Makefile
+!README.md
 
 !.bin/
 !link.sh

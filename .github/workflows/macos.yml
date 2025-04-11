@@ -1,9 +1,9 @@
-name: MacOS
+name: macOS
 on:
   push:
     branches: master
 jobs:
-  MacOS-Test:
+  macOS-Test:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
