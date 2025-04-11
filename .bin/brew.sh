@@ -1,2 +1,2 @@
-echo "Brewfileに記載されているパッケージをインストールします"
+echo ".Brewfileに記載されているパッケージをインストールします"
 brew bundle --global
