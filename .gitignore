@@ -5,6 +5,7 @@
 ### not ignore ###
 !.gitignore
 !LICENSE
+!Makefile
 
 !.bin/
 !link.sh
