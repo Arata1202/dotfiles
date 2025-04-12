@@ -36,6 +36,9 @@ make brew
 # Install zsh via Homebrew and set it as the default shell
 make zsh
 
+# Install all tools defined in .mise.toml
+make mise
+
 # Update the .Brewfile based on currently installed Homebrew packages
 make update
 

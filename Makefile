@@ -6,6 +6,7 @@ all:
 	.bin/link.sh
 	.bin/zsh.sh
 	.bin/code.sh
+	.bin/mise.sh
 
 brew:
 	.bin/brew.sh
@@ -19,7 +20,10 @@ code:
 zsh:
 	.bin/zsh.sh
 
+mise:
+	.bin/mise.sh
+
 update:
 	.bin/update.sh
 
-.PHONY: chmod all brew link code zsh update
+.PHONY: chmod all brew link code zsh mise update
