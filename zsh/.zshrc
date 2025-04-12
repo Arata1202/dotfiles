@@ -1,3 +1,9 @@
+# homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# mise
+eval "$(mise activate zsh)"
+
 # makefile
 alias mk='make -j'
 alias remake='make fclean && make -j'
