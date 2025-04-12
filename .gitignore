@@ -28,6 +28,7 @@
 
 !mise/
 !.mise.toml
+!.tool-versions
 
 !vim/
 !.vimrc
