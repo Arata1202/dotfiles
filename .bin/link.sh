@@ -1,4 +1,4 @@
-DOTFILES_DIR=~/dotfiles
+DOTFILES_DIR=$HOME/dotfiles
 
 echo "シンボリックリンクを作成します"
 
@@ -13,7 +13,7 @@ for file in "$DOTFILES_DIR"/*/* "$DOTFILES_DIR"/*/.[^.]*; do
         mkdir -p "$target_dir"
         link_name="$target_dir/$(basename "$file")"
     else
-        link_name=~/${file#"$DOTFILES_DIR"/*/}
+        link_name=$HOME/${file#"$DOTFILES_DIR"/*/}
     fi
 
     ln -sfn "$file" "$link_name"

@@ -10,4 +10,4 @@ jobs:
       - name: Run Tests
         run: |
           make chmod
-          make -j all
+          make all

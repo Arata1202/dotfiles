@@ -1,7 +1,5 @@
 echo ".Brewfileを更新します"
-cd homebrew
-brew bundle dump --global --force
+brew bundle dump --file=$HOME/dotfiles/homebrew/.Brewfile --force
 
-echo "extensionsを生成します"
-cd ../vscode
-code --list-extensions > extensions
+echo "extensionsを更新します"
+code --list-extensions > $HOME/dotfiles/vscode/extensions
