@@ -26,6 +26,9 @@
 !homebrew/
 !Brewfile
 
+!mise/
+!.mise.toml
+
 !vim/
 !.vimrc
 
