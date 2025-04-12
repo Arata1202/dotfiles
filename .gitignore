@@ -13,6 +13,7 @@
 !brew.sh
 !update.sh
 !zsh.sh
+!code.sh
 
 !.github/
 !workflows/
