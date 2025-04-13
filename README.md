@@ -16,30 +16,3 @@ make chmod
 make all
 
 ```
-
-### About Makefile
-
-```bash
-
-# Grant execute permission to all shell scripts in the .bin directory
-make chmod
-
-# Run the full setup
-make all
-
-# Create symbolic links from dotfiles to the home directory and VSCode config path
-make link
-
-# Install dependencies listed in .Brewfile via Homebrew
-make brew
-
-# Install zsh via Homebrew and set it as the default shell
-make zsh
-
-# Install all tools defined in .mise.toml
-make mise
-
-# Update the .Brewfile based on currently installed Homebrew packages
-make update
-
-```
