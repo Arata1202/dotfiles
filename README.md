@@ -19,7 +19,6 @@ git clone git@github.com:Arata1202/dotfiles.git
 cd dotfiles
 
 # Install
-make chmod
-make all
+make setup
 
 ```
