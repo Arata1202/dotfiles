@@ -27,6 +27,8 @@ github.copilot-chat
 golang.go
 hashicorp.terraform
 ionutvmi.path-autocomplete
+junstyle.php-cs-fixer
+mehedidracula.php-namespace-resolver
 mhutchie.git-graph
 mikestead.dotenv
 mosapride.zenkaku
@@ -35,9 +37,11 @@ ms-ceintl.vscode-language-pack-ja
 ms-python.debugpy
 ms-python.python
 ms-python.vscode-pylance
+ms-vscode-remote.remote-containers
 ms-vscode-remote.remote-ssh
 ms-vscode-remote.remote-ssh-edit
 ms-vscode.remote-explorer
+neilbrayfield.php-docblocker
 openai.chatgpt
 orta.vscode-jest
 pkief.material-icon-theme
@@ -45,9 +49,11 @@ pranaygp.vscode-css-peek
 prisma.prisma
 ritwickdey.liveserver
 rust-lang.rust-analyzer
+saoudrizwan.claude-dev
 serayuzgur.crates
 shardulm94.trailing-spaces
 streetsidesoftware.code-spell-checker
 usernamehw.errorlens
 vitest.explorer
 vue.volar
+xdebug.php-debug
