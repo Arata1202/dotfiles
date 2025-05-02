@@ -8,5 +8,6 @@
   "editor.formatOnSave": true,
   "chat.editing.alwaysSaveWithGeneratedChanges": true,
   "git.replaceTagsWhenPull": true,
-  "github.copilot.nextEditSuggestions.enabled": false
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "window.nativeTabs": true
 }
