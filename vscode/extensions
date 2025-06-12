@@ -1,5 +1,6 @@
 1yib.rust-bundle
 aaron-bond.better-comments
+anthropic.claude-code
 bmewburn.vscode-intelephense-client
 bradlc.vscode-tailwindcss
 christian-kohler.npm-intellisense
@@ -32,6 +33,7 @@ mehedidracula.php-namespace-resolver
 mhutchie.git-graph
 mikestead.dotenv
 mosapride.zenkaku
+ms-azuretools.vscode-containers
 ms-azuretools.vscode-docker
 ms-ceintl.vscode-language-pack-ja
 ms-python.debugpy
