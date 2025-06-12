@@ -1,2 +1,2 @@
-echo ".Brewfileに記載されているパッケージをインストールします"
+echo "Installing packages listed in .Brewfile"
 brew bundle --file=homebrew/.Brewfile

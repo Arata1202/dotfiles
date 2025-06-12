@@ -1,3 +1,3 @@
-echo ".mise.tomlに記載されているパッケージをインストールします"
+echo "Installing packages listed in .mise.toml"
 cd ~
 mise install

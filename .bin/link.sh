@@ -1,6 +1,6 @@
 DOTFILES_DIR=~/dotfiles
 
-echo "シンボリックリンクを作成します"
+echo "Creating symbolic links"
 
 for file in "$DOTFILES_DIR"/*/* "$DOTFILES_DIR"/*/.[^.]*; do
 
@@ -18,7 +18,7 @@ for file in "$DOTFILES_DIR"/*/* "$DOTFILES_DIR"/*/.[^.]*; do
 
     ln -sfn "$file" "$link_name"
 
-    echo "リンクを作成: $file -> $link_name"
+    echo "Created link: $file -> $link_name"
 done
 
-echo "シンボリックリンクがホームディレクトリ直下に作成されました"
+echo "Symbolic links have been created in the home directory"

@@ -1,5 +1,5 @@
-echo ".Brewfileを更新します"
+echo "Updating .Brewfile"
 brew bundle dump --file=homebrew/.Brewfile --force
 
-echo "extensionsを更新します"
+echo "Updating extensions"
 code --list-extensions > vscode/extensions

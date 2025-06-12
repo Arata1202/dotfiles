@@ -1,8 +1,8 @@
 if ! brew list zsh &>/dev/null; then
-    echo "zshがインストールされていないため、インストールを開始します..."
+    echo "zsh is not installed. Starting installation..."
     brew install zsh
 else
-    echo "zshはすでにインストールされています。"
+    echo "zsh is already installed."
 fi
 
 ZSH_PATH=$(brew --prefix)/bin/zsh
@@ -13,4 +13,4 @@ fi
 
 chsh -s "$ZSH_PATH"
 
-echo "brewでインストールしたzshをデフォルトシェルに設定しました。ターミナルを再起動してください。"
+echo "Set brew-installed zsh as the default shell. Please restart your terminal."
