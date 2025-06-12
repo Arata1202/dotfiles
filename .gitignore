@@ -3,42 +3,42 @@
 /.**
 
 ### not ignore ###
+!.envrc.example
 !.gitignore
 !LICENSE
 !Makefile
 !README.md
-!.envrc.example
 
 !.bin/
-!link.sh
 !brew.sh
+!code.sh
+!link.sh
+!mise.sh
 !update.sh
 !zsh.sh
-!code.sh
-!mise.sh
 
 !.github/
 !workflows/
 !macos.yml
 
 !git/
-!.gitignore_global
 !.gitconfig_shared
+!.gitignore_global
 
 !homebrew/
 !Brewfile
 
 !mise/
 !.mise.toml
-!.tool-versions
 
 !vim/
 !.vimrc
 
 !vscode/
 !extensions
-!settings.json
 !keybindings.json
+!settings.json
 
 !zsh/
+!.zprofile
 !.zshrc

@@ -1,29 +1,26 @@
-chmod:
-	@chmod +x .bin/*.sh
-
-setup: chmod
+setup:
 	.bin/brew.sh
-	.bin/link.sh
-	.bin/zsh.sh
 	.bin/code.sh
+	.bin/link.sh
 	.bin/mise.sh
+	.bin/zsh.sh
 
 brew:
 	.bin/brew.sh
 
-link:
-	.bin/link.sh
-
 code:
 	.bin/code.sh
 
-zsh:
-	.bin/zsh.sh
+link:
+	.bin/link.sh
 
 mise:
 	.bin/mise.sh
 
+zsh:
+	.bin/zsh.sh
+
 update:
 	.bin/update.sh
 
-.PHONY: chmod setup brew link code zsh mise update
+.PHONY: setup brew code link mise zsh update
