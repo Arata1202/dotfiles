@@ -3,7 +3,6 @@
 /.**
 
 ### not ignore ###
-!.envrc.example
 !.gitignore
 !LICENSE
 !Makefile
