@@ -7,10 +7,9 @@
 
 ## Getting Started
 
-### Install on macOS
+### Install dotfiles
 
 ```bash
-
 # Move to the home directory
 cd ~
 
@@ -20,5 +19,14 @@ cd dotfiles
 
 # Install
 make setup
+```
 
+### Update dotfiles
+
+```bash
+# Move to repository
+cd ~/dotfiles
+
+# Update
+make update
 ```
