@@ -1,26 +1,26 @@
 setup:
-	.bin/brew.sh
-	.bin/code.sh
-	.bin/link.sh
-	.bin/mise.sh
-	.bin/zsh.sh
+	scripts/brew.sh
+	scripts/code.sh
+	scripts/link.sh
+	scripts/mise.sh
+	scripts/zsh.sh
 
 brew:
-	.bin/brew.sh
+	scripts/brew.sh
 
 code:
-	.bin/code.sh
+	scripts/code.sh
 
 link:
-	.bin/link.sh
+	scripts/link.sh
 
 mise:
-	.bin/mise.sh
+	scripts/mise.sh
 
 zsh:
-	.bin/zsh.sh
+	scripts/zsh.sh
 
 update:
-	.bin/update.sh
+	scripts/update.sh
 
 .PHONY: setup brew code link mise zsh update

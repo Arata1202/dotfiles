@@ -8,7 +8,7 @@
 !Makefile
 !README.md
 
-!.bin/
+!scripts/
 !brew.sh
 !code.sh
 !link.sh
