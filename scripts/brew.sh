@@ -1,2 +1,2 @@
 echo "Installing packages listed in .Brewfile"
-brew bundle --file=homebrew/.Brewfile
+brew bundle --file=homebrew/.Brewfile --verbose
