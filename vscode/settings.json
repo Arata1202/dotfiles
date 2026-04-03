@@ -9,5 +9,10 @@
   "chat.editing.alwaysSaveWithGeneratedChanges": true,
   "git.replaceTagsWhenPull": true,
   "github.copilot.nextEditSuggestions.enabled": false,
-  "window.nativeTabs": true
+  "window.nativeTabs": true,
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "text": "Write commit messages in English using Conventional Commits format (e.g. feat:, fix:, refactor:, docs:, chore:). Keep the subject line concise (under 72 characters)."
+    }
+  ]
 }
