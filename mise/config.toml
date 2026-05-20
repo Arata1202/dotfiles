@@ -11,5 +11,6 @@ flutter = '3.29.2-stable'
 awscli = '2.26.1'
 azure-cli = '2.83.0'
 terraform = '1.11.4'
-"npm:@openai/codex" = '0.118.0'
-"npm:@anthropic-ai/claude-code" = '2.1.91'
+
+[settings]
+idiomatic_version_file_enable_tools = ["node"]

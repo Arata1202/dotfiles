@@ -12,6 +12,10 @@ for file in "$DOTFILES_DIR"/*/* "$DOTFILES_DIR"/*/.[^.]*; do
         target_dir="$HOME/Library/Application Support/Code/User"
         mkdir -p "$target_dir"
         link_name="$target_dir/$(basename "$file")"
+    elif [[ $file == "$DOTFILES_DIR/mise/config.toml" ]]; then
+        target_dir="$HOME/.config/mise"
+        mkdir -p "$target_dir"
+        link_name="$target_dir/config.toml"
     else
         link_name=~/${file#"$DOTFILES_DIR"/*/}
     fi
