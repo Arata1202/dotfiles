@@ -30,6 +30,7 @@
 	autocrlf = input
 	excludesfile = ~/.gitignore_global
 	fsmonitor = true
+	ignorecase = false
 	untrackedCache = true
 [rebase]
 	autoSquash = true
@@ -38,7 +39,7 @@
 [merge]
 	conflictstyle = zdiff3
 [pull]
-	rebase = true
+	rebase = false
 [color]
 	ui = auto
 [alias]
