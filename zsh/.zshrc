@@ -50,7 +50,7 @@ alias glo='git log --oneline'
 ## cherry-pick
 alias gcp='git cherry-pick'
 ## history
-alias ghi='git history'
+alias ghi='git switch-history'
 
 # terminal
 cdls ()
