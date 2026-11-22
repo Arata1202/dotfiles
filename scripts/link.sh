@@ -20,6 +20,16 @@ link_file() {
     if [[ $phase == apply ]]; then
         mkdir -p "$(dirname "$target")"
         ln -s "$source" "$target"
+    else
+        local parent
+        parent=$(dirname "$target")
+        while [[ ! -d "$parent" ]]; do
+            if [[ -e "$parent" || -L "$parent" ]]; then
+                echo "Link conflict: $parent must be a directory (for $target)" >&2
+                return 1
+            fi
+            parent=$(dirname "$parent")
+        done
     fi
 }
 

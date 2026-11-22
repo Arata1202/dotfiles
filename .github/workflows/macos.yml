@@ -19,6 +19,11 @@ jobs:
           test "$(cat "$HOME/.zshrc")" = existing
           test ! -L "$HOME/.gitconfig_shared"
           mv "$HOME/.zshrc" "$HOME/.zshrc.original"
+          echo existing > "$HOME/.config"
+          if make link; then exit 1; fi
+          test "$(cat "$HOME/.config")" = existing
+          test ! -L "$HOME/.gitconfig_shared"
+          mv "$HOME/.config" "$HOME/.config.original"
           git config --global user.name 'Existing User'
           make link
           make link
