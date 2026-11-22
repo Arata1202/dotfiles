@@ -142,7 +142,7 @@ alias nrt='npm run test'
 # pnpm
 alias pi='pnpm install'
 alias pu='pnpm update'
-alias ps='pnpm start'
+alias pstart='pnpm start'
 alias prb='pnpm run build'
 alias prd='pnpm run dev'
 alias prt='pnpm run test'

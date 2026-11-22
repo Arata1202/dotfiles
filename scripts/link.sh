@@ -40,12 +40,20 @@ for phase in check apply; do
     link_file mise/config.toml "$HOME/.config/mise/config.toml"
     link_file vim/.vimrc "$HOME/.vimrc"
     link_file vscode/settings.json "$code_user/settings.json"
-    link_file vscode/keybindings.json "$code_user/keybindings.json"
     link_file zsh/.zprofile "$HOME/.zprofile"
     link_file zsh/.zshrc "$HOME/.zshrc"
     if [[ -f "$repo/local/.zprofile.local" ]]; then
         link_file local/.zprofile.local "$HOME/.zprofile.local"
     fi
 done
+
+keybindings="$code_user/keybindings.json"
+if [[ -L "$keybindings" && "$keybindings" -ef "$repo/vscode/keybindings.json" ]]; then
+    copy=$(mktemp "$code_user/.keybindings.XXXXXX")
+    trap 'rm -f "$copy"' EXIT
+    cat "$keybindings" > "$copy"
+    mv -f "$copy" "$keybindings"
+    trap - EXIT
+fi
 
 python3 "$repo/scripts/git-config.py"

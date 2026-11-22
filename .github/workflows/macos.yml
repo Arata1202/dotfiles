@@ -27,8 +27,15 @@ jobs:
           git config --global user.name 'Existing User'
           git config --global core.editor nano
           git config --global --add include.path '~/.gitconfig_shared'
+          keybindings="$HOME/Library/Application Support/Code/User/keybindings.json"
+          mkdir -p "$(dirname "$keybindings")"
+          ln -s "$PWD/vscode/keybindings.json" "$keybindings"
           make link
+          test ! -L "$keybindings"
+          cmp vscode/keybindings.json "$keybindings"
+          echo '[]' > "$keybindings"
           make link
+          test "$(cat "$keybindings")" = '[]'
           test "$HOME/.zshrc" -ef zsh/.zshrc
           test "$HOME/.config/mise/config.toml" -ef mise/config.toml
           test "$HOME/Library/Application Support/Code/User/settings.json" -ef vscode/settings.json
