@@ -44,3 +44,5 @@ jobs:
           test "$(git config --get alias.br)" = branch
           test "$(git config --get core.editor)" = nano
           test "$(git config --global user.name)" = 'Existing User'
+      - name: Verify snapshot saving and rollback
+        run: python3 tests/test_snapshot.py
