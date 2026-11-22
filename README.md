@@ -23,11 +23,10 @@ Setup links the configuration, loads shared Git defaults before your personal se
 
 ### Capture the current machine
 
-Edit `homebrew/.Brewfile` and `vscode/extensions` to change what setup installs. To capture the packages and extensions currently installed on this Mac, run the following in the checkout and review the diff before committing.
+Edit `homebrew/.Brewfile` and `vscode/extensions` to choose what setup installs. Run `make snapshot` (or `make update`) to preview how the installed packages and extensions differ from these lists.
 
 ```bash
 make snapshot
-git diff -- homebrew/.Brewfile vscode/extensions
 ```
 
-`make update` remains an alias for `make snapshot`.
+To replace both lists with a fresh snapshot of the current machine, run `make snapshot-apply`.

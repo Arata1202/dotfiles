@@ -65,7 +65,7 @@ class SnapshotTest(unittest.TestCase):
                         save(self.snapshot)
                 self.assert_original_files()
 
-    def test_make_snapshot_updates_both_files(self):
+    def test_snapshot_previews_until_explicitly_applied(self):
         shutil.copy(ROOT / "Makefile", ".")
         Path("scripts").mkdir()
         for name in ("update.sh", "save-snapshot.py"):
@@ -79,7 +79,12 @@ class SnapshotTest(unittest.TestCase):
         for command in (brew, code):
             command.chmod(0o755)
         env = dict(os.environ, PATH=str(commands) + os.pathsep + os.environ["PATH"])
-        subprocess.run(["make", "snapshot"], env=env, check=True)
+        for target in ("snapshot", "update"):
+            preview = subprocess.check_output(["make", target], env=env, text=True)
+            self.assertIn("+new packages", preview)
+            self.assertIn("+new extensions", preview)
+            self.assert_original_files()
+        subprocess.run(["make", "snapshot-apply"], env=env, check=True)
         self.assertEqual(self.brewfile.read_text(), "new packages")
         self.assertEqual(self.extensions.read_text(), "new extensions")
 

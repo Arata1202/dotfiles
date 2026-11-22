@@ -27,4 +27,7 @@ update: snapshot
 snapshot:
 	scripts/update.sh
 
-.PHONY: setup brew code link mise zsh update snapshot
+snapshot-apply:
+	scripts/update.sh --apply
+
+.PHONY: setup brew code link mise zsh update snapshot snapshot-apply
