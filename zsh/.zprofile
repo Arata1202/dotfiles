@@ -7,9 +7,3 @@ if [[ -x /opt/homebrew/bin/brew ]]; then
 elif [[ -x /usr/local/bin/brew ]]; then
     eval "$(/usr/local/bin/brew shellenv)"
 fi
-
-# mise
-eval "$(mise activate zsh)"
-
-# direnv
-eval "$(direnv hook zsh)"

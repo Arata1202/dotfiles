@@ -1,3 +1,17 @@
+# mise
+if (( $+commands[mise] )); then
+    eval "$(command mise activate zsh)"
+elif [[ -x /opt/homebrew/bin/mise ]]; then
+    eval "$(/opt/homebrew/bin/mise activate zsh)"
+elif [[ -x /usr/local/bin/mise ]]; then
+    eval "$(/usr/local/bin/mise activate zsh)"
+fi
+
+# direnv
+if (( $+commands[direnv] )); then
+    eval "$(command direnv hook zsh)"
+fi
+
 # makefile
 alias mk='make -j'
 alias remake='make fclean && make -j'

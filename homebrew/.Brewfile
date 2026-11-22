@@ -1,4 +1,4 @@
-tap "apple/apple", "http://github.com/apple/homebrew-apple"
+tap "apple/apple"
 tap "rbenv/tap"
 tap "yakitrak/yakitrak"
 brew "openssl@3"
