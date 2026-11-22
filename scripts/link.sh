@@ -48,6 +48,4 @@ for phase in check apply; do
     fi
 done
 
-if ! git config --global --path --get-all include.path | grep -Fxq "$HOME/.gitconfig_shared"; then
-    git config --global --add include.path '~/.gitconfig_shared'
-fi
+python3 "$repo/scripts/git-config.py"

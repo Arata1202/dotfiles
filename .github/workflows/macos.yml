@@ -25,12 +25,15 @@ jobs:
           test ! -L "$HOME/.gitconfig_shared"
           mv "$HOME/.config" "$HOME/.config.original"
           git config --global user.name 'Existing User'
+          git config --global core.editor nano
+          git config --global --add include.path '~/.gitconfig_shared'
           make link
           make link
           test "$HOME/.zshrc" -ef zsh/.zshrc
           test "$HOME/.config/mise/config.toml" -ef mise/config.toml
           test "$HOME/Library/Application Support/Code/User/settings.json" -ef vscode/settings.json
           test ! -e "$HOME/update.sh"
-          test "$(git config --global --get-all include.path)" = '~/.gitconfig_shared'
-          test "$(git config --global --includes --get alias.br)" = branch
+          test "$(git config --get-all include.path)" = '~/.gitconfig_shared'
+          test "$(git config --get alias.br)" = branch
+          test "$(git config --get core.editor)" = nano
           test "$(git config --global user.name)" = 'Existing User'

@@ -65,7 +65,9 @@ alias ll='ls -alhF'
 alias la='ls -a'
 
 ## diff
-alias diff='colordiff -u'
+if (( $+commands[colordiff] )); then
+    alias diff='colordiff -u'
+fi
 
 # mkdir
 alias mkdir='mkdir -p'
