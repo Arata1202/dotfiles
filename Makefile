@@ -1,7 +1,9 @@
 setup:
+	@command -v brew >/dev/null || { echo "Install Homebrew and add brew to PATH before setup." >&2; exit 1; }
+	@command -v git >/dev/null || { echo "Install Git before setup." >&2; exit 1; }
+	scripts/link.sh
 	scripts/brew.sh
 	scripts/code.sh
-	scripts/link.sh
 	scripts/mise.sh
 	scripts/zsh.sh
 
@@ -20,7 +22,9 @@ mise:
 zsh:
 	scripts/zsh.sh
 
-update:
+update: snapshot
+
+snapshot:
 	scripts/update.sh
 
-.PHONY: setup brew code link mise zsh update
+.PHONY: setup brew code link mise zsh update snapshot

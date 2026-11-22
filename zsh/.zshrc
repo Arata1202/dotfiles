@@ -27,7 +27,6 @@ alias gstt='git status -uno'
 alias gst='git stash -u'
 alias gsp='git stash pop'
 alias gsl='git stash list'
-alias gsc='git stash clear'
 ## branch
 alias gbr='git branch'
 ## push

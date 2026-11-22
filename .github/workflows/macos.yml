@@ -2,11 +2,30 @@ name: macOS
 on:
   push:
     branches: master
+  pull_request:
 jobs:
-  macOS-Test:
+  links:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Run Tests
+      - uses: actions/checkout@v4
+      - name: Verify first install, repeated install, and conflict handling
+        shell: bash
         run: |
-          make setup
+          set -eu
+          export HOME="$(mktemp -d)"
+          export XDG_CONFIG_HOME="$HOME/.config"
+          echo existing > "$HOME/.zshrc"
+          if make link; then exit 1; fi
+          test "$(cat "$HOME/.zshrc")" = existing
+          test ! -L "$HOME/.gitconfig_shared"
+          mv "$HOME/.zshrc" "$HOME/.zshrc.original"
+          git config --global user.name 'Existing User'
+          make link
+          make link
+          test "$HOME/.zshrc" -ef zsh/.zshrc
+          test "$HOME/.config/mise/config.toml" -ef mise/config.toml
+          test "$HOME/Library/Application Support/Code/User/settings.json" -ef vscode/settings.json
+          test ! -e "$HOME/update.sh"
+          test "$(git config --global --get-all include.path)" = '~/.gitconfig_shared'
+          test "$(git config --global --includes --get alias.br)" = branch
+          test "$(git config --global user.name)" = 'Existing User'

@@ -7,26 +7,27 @@
 
 ## Getting Started
 
-### Install dotfiles
+### Install dotfiles on macOS
+
+Install the Xcode Command Line Tools (`xcode-select --install`) and [Homebrew](https://brew.sh/). Follow Homebrew's shell setup instructions and confirm that `git`, `make`, and `brew` are on your PATH.
+
+Clone into any permanent directory. The installed links point back to this checkout.
 
 ```bash
-# Move to the home directory
-cd ~
-
-# Clone repository
-git clone git@github.com:Arata1202/dotfiles.git
+git clone https://github.com/Arata1202/dotfiles.git
 cd dotfiles
-
-# Install
 make setup
 ```
 
-### Update dotfiles
+Setup links the configuration, includes the shared settings in your global Git config, installs Homebrew packages, VS Code extensions and mise tools, and sets Homebrew zsh as your login shell. The shell change may prompt for your password. If setup reports a link conflict, inspect the named file, move it aside if you want to use the repository version, and rerun setup.
+
+### Capture the current machine
+
+Edit `homebrew/.Brewfile` and `vscode/extensions` to change what setup installs. To capture the packages and extensions currently installed on this Mac, run the following in the checkout and review the diff before committing.
 
 ```bash
-# Move to repository
-cd ~/dotfiles
-
-# Update
-make update
+make snapshot
+git diff -- homebrew/.Brewfile vscode/extensions
 ```
+
+`make update` remains an alias for `make snapshot`.

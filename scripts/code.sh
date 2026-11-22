@@ -1,5 +1,6 @@
-echo "Installing extensions listed in extensions"
-cat $HOME/dotfiles/vscode/extensions | while read line
-do
-    code --install-extension $line
-done
+#!/bin/bash
+set -eu
+repo=$(cd "$(dirname "$0")/.." && pwd -P)
+while IFS= read -r extension || [[ -n "$extension" ]]; do
+    [[ -z "$extension" ]] || code --install-extension "$extension"
+done < "$repo/vscode/extensions"
