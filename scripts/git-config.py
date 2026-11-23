@@ -34,8 +34,8 @@ def update(config, first, check_only):
 
     config.parent.mkdir(parents=True, exist_ok=True)
     try:
-        with lock.open("xb"):
-            pass
+        fd = os.open(lock, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+        os.close(fd)
     except FileExistsError:
         sys.exit(f"Git config is locked: {lock}")
     replaced = False
@@ -49,8 +49,6 @@ def update(config, first, check_only):
                 body = body[len(header):]
             if body != original:
                 lock.write_bytes(body)
-        else:
-            lock.chmod(0o600)
 
         # Remove the include written by earlier setups, preserving unrelated includes.
         for value in ("~/.gitconfig_shared", str(shared)):

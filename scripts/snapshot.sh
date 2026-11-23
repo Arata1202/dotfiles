@@ -13,6 +13,11 @@ awk '!/^brew "(php|composer|(rbenv\/tap\/)?openssl@1[.]1)"(,|$)/' "$snapshot/bre
 python3 scripts/list-extensions.py > "$snapshot/extensions"
 if [[ ${1:-} == --apply ]]; then
     for target in homebrew/.Brewfile vscode/extensions; do
+        parent=${target%/*}
+        if [[ ! -d "$parent" || ! -w "$parent" || ! -x "$parent" ]]; then
+            echo "Cannot update $target in $parent" >&2
+            exit 1
+        fi
         if [[ -e "$target" && ( ! -f "$target" || ! -w "$target" ) ]]; then
             echo "Cannot update $target" >&2
             exit 1
