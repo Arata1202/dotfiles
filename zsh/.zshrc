@@ -1,8 +1,6 @@
 # mise
 if (( $+commands[mise] )); then
     eval "$(command mise activate zsh)"
-elif [[ -x /opt/homebrew/bin/mise ]]; then
-    eval "$(/opt/homebrew/bin/mise activate zsh)"
 fi
 
 # direnv
@@ -75,11 +73,6 @@ alias ls='ls --color=auto -GF'
 alias ll='ls -alhF'
 alias la='ls -a'
 
-## diff
-if (( $+commands[colordiff] )); then
-    alias diff='colordiff -u'
-fi
-
 # mkdir
 alias mkdir='mkdir -p'
 
@@ -103,12 +96,6 @@ alias reload='source "$HOME/.zshrc"'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
-
-# mysql
-if (( $+commands[mysql.server] )); then
-    alias ms='mysql.server'
-    alias mss='mysql.server start'
-fi
 
 # docker
 alias d='docker'

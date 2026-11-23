@@ -29,7 +29,6 @@
 	editor = vi
 	autocrlf = input
 	fsmonitor = true
-	ignorecase = false
 	untrackedCache = true
 [rebase]
 	autoSquash = true

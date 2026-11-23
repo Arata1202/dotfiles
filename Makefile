@@ -22,12 +22,10 @@ mise:
 zsh:
 	scripts/zsh.sh
 
-update: snapshot
-
 snapshot:
 	scripts/snapshot.sh
 
 snapshot-apply:
 	scripts/snapshot.sh --apply
 
-.PHONY: setup brew code link mise zsh update snapshot snapshot-apply
+.PHONY: setup brew code link mise zsh snapshot snapshot-apply

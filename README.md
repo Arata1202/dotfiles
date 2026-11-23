@@ -11,8 +11,6 @@
 
 Install the Xcode Command Line Tools (`xcode-select --install`) and [Homebrew](https://brew.sh/). Follow Homebrew's shell setup instructions and confirm that `git`, `make`, and `brew` are on your PATH.
 
-If Homebrew asks you to trust a third-party cask, review it before running `brew trust --cask owner/tap/name`.
-
 Clone into any permanent directory. The installed links point back to this checkout.
 
 ```bash
@@ -33,7 +31,7 @@ Use mise for language runtimes and development tools whose versions affect build
 
 ### Capture the current machine
 
-Edit `homebrew/.Brewfile` and `vscode/extensions` to choose what setup installs. Run `make snapshot` (or `make update`) to preview how the installed packages and extensions differ from these lists.
+Edit `homebrew/.Brewfile` and `vscode/extensions` to choose what setup installs. Run `make snapshot` to preview how the installed packages and extensions differ from these lists.
 
 ```bash
 make snapshot

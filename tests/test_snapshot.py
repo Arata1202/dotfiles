@@ -109,11 +109,10 @@ exit 1
         for command in (brew, code):
             command.chmod(0o755)
         env = dict(os.environ, PATH=str(commands) + os.pathsep + os.environ["PATH"])
-        for target in ("snapshot", "update"):
-            preview = subprocess.check_output(["make", target], env=env, text=True)
-            self.assertIn("+new packages", preview)
-            self.assertIn("+test.parent", preview)
-            self.assert_original_files()
+        preview = subprocess.check_output(["make", "snapshot"], env=env, text=True)
+        self.assertIn("+new packages", preview)
+        self.assertIn("+test.parent", preview)
+        self.assert_original_files()
         subprocess.run(["make", "snapshot-apply"], env=env, check=True)
         self.assertEqual(self.brewfile.read_text(), "new packages\n")
         self.assertEqual(self.extensions.read_text(), "test.parent\ntest.standalone\n")

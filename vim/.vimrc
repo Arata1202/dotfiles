@@ -1,7 +1,3 @@
-let g:indentLine_color_term = 239
-let g:indentLine_color_gui = '#708090'
-let g:indentLine_char = '¦'
-
 "----------------------------------------
 " 検索
 "----------------------------------------
@@ -25,13 +21,12 @@ syntax on
 set number
 " タイトルを表示
 set title
-set guioptions+=R
 set shiftwidth=4
 set autoindent
 set ruler
 set showmatch
 set cursorline
-" タブ文字を CTRL-I で表示し、行末に $ で表示する
+" タブと行末の空白を可視化する
 set list
 set listchars=tab:>_,trail:~,extends:>,precedes:<
 " ファイル内にあるタブ文字の表示幅
