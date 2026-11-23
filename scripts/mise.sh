@@ -13,9 +13,8 @@ trap 'rm -rf "$work"' EXIT
 cd -P "$work"
 export MISE_CEILING_PATHS="$PWD" MISE_GLOBAL_CONFIG_FILE="$config"
 MISE_PARANOID=1 mise trust "$config"
-icu_prefix=$(brew --prefix icu4c@77)
 openssl_prefix=$(brew --prefix openssl@3)
-export PKG_CONFIG_PATH="${openssl_prefix}/lib/pkgconfig:${icu_prefix}/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
+export PKG_CONFIG_PATH="${openssl_prefix}/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
 export OPENSSL_CFLAGS="-I$openssl_prefix/include"
 export OPENSSL_LIBS="-L$openssl_prefix/lib -lssl -lcrypto"
 

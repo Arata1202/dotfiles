@@ -27,7 +27,6 @@ alias gm='git merge'
 alias gms='git merge --squash'
 ## checkout
 alias gco='git switch'
-alias gcb='git switch -c'
 alias gsw='git switch'
 alias gsc='git switch -c'
 ## status

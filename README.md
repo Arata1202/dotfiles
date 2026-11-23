@@ -9,7 +9,11 @@
 
 ### Install dotfiles on macOS
 
-Install the Xcode Command Line Tools (`xcode-select --install`) and [Homebrew](https://brew.sh/). Follow Homebrew's shell setup instructions and confirm that `git`, `make`, and `brew` are on your PATH.
+Install the Xcode Command Line Tools (`xcode-select --install`) and [Homebrew](https://brew.sh/). On Apple Silicon, load Homebrew in the current shell. The linked `.zprofile` will load it in future login shells.
+
+```bash
+eval "$(/opt/homebrew/bin/brew shellenv)"
+```
 
 Clone into any permanent directory. The installed links point back to this checkout.
 
@@ -22,6 +26,8 @@ make setup
 Setup links the configuration, loads shared Git defaults before your personal settings, installs Homebrew packages and VS Code extensions, and sets Homebrew zsh as your login shell. Setup trusts the checkout’s `mise/config.toml` before installing its tools. The shell change may prompt for your password. If setup reports a link conflict, inspect the named file, move it aside if you want to use the repository version, and rerun setup.
 
 Setup adds shared ignore patterns to Git’s default global ignore file (`$XDG_CONFIG_HOME/git/ignore`, or `~/.config/git/ignore`). Existing rules keep their order and take precedence over added defaults.
+
+If you use `~/.zprofile.local` for machine-specific shell settings, copy it separately when moving to a new Mac.
 
 ### Package management
 
