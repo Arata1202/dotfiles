@@ -2,7 +2,6 @@
 set -eu
 
 repo=$(cd "$(dirname "$0")/.." && pwd -P)
-zsh_dir=${ZDOTDIR:-$HOME}
 code_user="$HOME/Library/Application Support/Code/User"
 
 link_file() {
@@ -37,14 +36,11 @@ link_file() {
 for phase in check apply; do
     link_file git/.gitconfig_shared "$HOME/.gitconfig_shared"
     link_file homebrew/.Brewfile "$HOME/.Brewfile"
-    link_file mise/config.toml "${XDG_CONFIG_HOME:-$HOME/.config}/mise/config.toml"
+    link_file mise/config.toml "$HOME/.config/mise/config.toml"
     link_file vim/.vimrc "$HOME/.vimrc"
     link_file vscode/settings.json "$code_user/settings.json"
-    link_file zsh/.zprofile "$zsh_dir/.zprofile"
-    link_file zsh/.zshrc "$zsh_dir/.zshrc"
-    if [[ -f "$repo/local/.zprofile.local" ]]; then
-        link_file local/.zprofile.local "$zsh_dir/.zprofile.local"
-    fi
+    link_file zsh/.zprofile "$HOME/.zprofile"
+    link_file zsh/.zshrc "$HOME/.zshrc"
     if [[ $phase == check ]]; then
         python3 "$repo/scripts/git-config.py" --check
     fi

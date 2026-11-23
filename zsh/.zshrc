@@ -3,8 +3,6 @@ if (( $+commands[mise] )); then
     eval "$(command mise activate zsh)"
 elif [[ -x /opt/homebrew/bin/mise ]]; then
     eval "$(/opt/homebrew/bin/mise activate zsh)"
-elif [[ -x /usr/local/bin/mise ]]; then
-    eval "$(/usr/local/bin/mise activate zsh)"
 fi
 
 # direnv
@@ -98,8 +96,8 @@ alias c='pbcopy'
 alias pwdc='printf "%s" "$PWD" | pbcopy'
 
 # edit
-alias zshrc='vi "${ZDOTDIR:-$HOME}/.zshrc"'
-alias reload='source "${ZDOTDIR:-$HOME}/.zshrc"'
+alias zshrc='vi "$HOME/.zshrc"'
+alias reload='source "$HOME/.zshrc"'
 
 # safety
 alias cp='cp -i'

@@ -1,9 +1,3 @@
-tap "apple/apple"
-tap "dotenvx/brew"
-tap "hashicorp/tap"
-tap "manaflow-ai/cmux"
-tap "rbenv/tap"
-tap "yakitrak/yakitrak"
 brew "openssl@3", link: true
 brew "arp-scan"
 brew "gettext"
