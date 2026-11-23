@@ -28,7 +28,6 @@
 [core]
 	editor = vi
 	autocrlf = input
-	excludesfile = ~/.gitignore_global
 	fsmonitor = true
 	ignorecase = false
 	untrackedCache = true

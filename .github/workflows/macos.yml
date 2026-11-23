@@ -30,6 +30,8 @@ jobs:
           test "$(cat "$XDG_CONFIG_HOME/git")" = existing
           test ! -L "$HOME/.gitconfig_shared"
           mv "$XDG_CONFIG_HOME/git" "$HOME/git.original"
+          mkdir -p "$XDG_CONFIG_HOME/git"
+          printf 'machine-only.tmp\n!.envrc\n' > "$XDG_CONFIG_HOME/git/ignore"
           git config --global user.name 'Existing User'
           git config --global core.editor nano
           git config --global --add include.path '~/.gitconfig_shared'
@@ -37,10 +39,16 @@ jobs:
           mkdir -p "$(dirname "$keybindings")"
           ln -s "$PWD/vscode/keybindings.json" "$keybindings"
           make link
+          git init -q "$HOME/check-ignore"
+          git -C "$HOME/check-ignore" check-ignore --no-index machine-only.tmp
+          git -C "$HOME/check-ignore" check-ignore --no-index example~
+          if git -C "$HOME/check-ignore" check-ignore --no-index -q .envrc; then exit 1; fi
+          cp "$XDG_CONFIG_HOME/git/ignore" "$HOME/ignore.first"
           test ! -L "$keybindings"
           cmp vscode/keybindings.json "$keybindings"
           echo '[]' > "$keybindings"
           make link
+          cmp "$HOME/ignore.first" "$XDG_CONFIG_HOME/git/ignore"
           test "$(cat "$keybindings")" = '[]'
           test "$HOME/.zshrc" -ef zsh/.zshrc
           test "$HOME/.config/mise/config.toml" -ef mise/config.toml

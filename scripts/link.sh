@@ -35,7 +35,6 @@ link_file() {
 
 for phase in check apply; do
     link_file git/.gitconfig_shared "$HOME/.gitconfig_shared"
-    link_file git/.gitignore_global "$HOME/.gitignore_global"
     link_file homebrew/.Brewfile "$HOME/.Brewfile"
     link_file mise/config.toml "$HOME/.config/mise/config.toml"
     link_file vim/.vimrc "$HOME/.vimrc"
