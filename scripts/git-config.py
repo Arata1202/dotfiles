@@ -19,16 +19,24 @@ def check_path(config):
         sys.exit(f"Git config conflict: {config} must be a regular file")
 
 
-def update(config, first):
+def update(config, first, check_only):
     if config == shared.resolve():
         return
     if not first and not config.exists():
         return
 
-    config.parent.mkdir(parents=True, exist_ok=True)
     lock = config.with_name(config.name + ".lock")
-    with lock.open("xb"):
-        pass
+    if check_only:
+        if os.path.lexists(lock):
+            sys.exit(f"Git config is locked: {lock}")
+        return
+
+    config.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        with lock.open("xb"):
+            pass
+    except FileExistsError:
+        sys.exit(f"Git config is locked: {lock}")
     replaced = False
     try:
         original = config.read_bytes() if config.exists() else b""
@@ -83,12 +91,13 @@ if __name__ == "__main__":
     xdg = Path(os.environ.get("XDG_CONFIG_HOME") or Path.home() / ".config")
     ignore = xdg / "git/ignore"
     paths = subprocess.check_output(["git", "var", "GIT_CONFIG_GLOBAL"], text=True)
-    if sys.argv[1:] == ["--check"]:
+    check_only = sys.argv[1:] == ["--check"]
+    if check_only:
         check_path(ignore)
         for path in paths.splitlines():
             check_path(Path(path))
-        sys.exit(0)
     configs = dict.fromkeys(Path(path).resolve() for path in paths.splitlines())
     for index, config in enumerate(configs):
-        update(config, first=index == 0)
-    install_ignore(ignore.resolve())
+        update(config, first=index == 0, check_only=check_only)
+    if not check_only:
+        install_ignore(ignore.resolve())

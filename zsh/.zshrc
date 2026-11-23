@@ -68,9 +68,8 @@ alias ghi='git switch-history'
 # terminal
 cdls ()
 {
-    \cd "$@" && ls
+    builtin cd "$@" && ls
 }
-alias cd="cdls"
 
 # ls
 export LSCOLORS=gxfxcxdxbxegedabagacad

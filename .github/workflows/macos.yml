@@ -31,6 +31,13 @@ jobs:
           test ! -L "$HOME/.gitconfig_shared"
           mv "$XDG_CONFIG_HOME/git" "$HOME/git.original"
           mkdir -p "$XDG_CONFIG_HOME/git"
+          lock="$XDG_CONFIG_HOME/git/config.lock"
+          echo existing > "$lock"
+          if make link > "$HOME/link.log" 2>&1; then exit 1; fi
+          grep -F "Git config is locked: $(cd "$XDG_CONFIG_HOME/git" && pwd -P)/config.lock" "$HOME/link.log"
+          test "$(cat "$lock")" = existing
+          test ! -L "$HOME/.gitconfig_shared"
+          mv "$lock" "$HOME/config.lock.original"
           printf 'machine-only.tmp\n!.envrc\n' > "$XDG_CONFIG_HOME/git/ignore"
           git config --global user.name 'Existing User'
           git config --global core.editor nano
