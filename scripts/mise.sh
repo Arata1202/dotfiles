@@ -9,4 +9,5 @@ if [[ ! "$config" -ef "$repo/mise/config.toml" ]]; then
     exit 1
 fi
 MISE_PARANOID=1 mise trust "$config"
-mise install
+icu_prefix=$(brew --prefix icu4c@77)
+PKG_CONFIG_PATH="${icu_prefix}/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}" mise install

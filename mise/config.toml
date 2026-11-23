@@ -25,5 +25,11 @@ pipx = "1.18.19"
 rclone = "1.76.0"
 terraform = "1.17.2"
 
+[plugins]
+azure-cli = "https://github.com/mise-plugins/mise-azure-cli.git"
+cocoapods = "https://github.com/mise-plugins/mise-cocoapods.git"
+flutter = "https://github.com/mise-plugins/mise-flutter.git"
+php = "https://github.com/asdf-community/asdf-php"
+
 [settings]
 idiomatic_version_file_enable_tools = ["node"]

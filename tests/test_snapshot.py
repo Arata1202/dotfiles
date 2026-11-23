@@ -27,8 +27,8 @@ class SnapshotTest(unittest.TestCase):
             target.write_text("original " + target.name)
         self.snapshot = Path("snapshot")
         self.snapshot.mkdir()
-        (self.snapshot / "Brewfile").write_text("new packages")
-        (self.snapshot / "extensions").write_text("test.parent\ntest.child\n")
+        (self.snapshot / "Brewfile").write_text('new packages\nbrew "php"\nbrew "composer"\n')
+        (self.snapshot / "extensions").write_text("test.parent\ntest.child\ntest.partial\ntest.standalone\n")
 
     def assert_original_files(self):
         self.assertEqual(self.brewfile.read_text(), "original .Brewfile")
@@ -39,7 +39,7 @@ class SnapshotTest(unittest.TestCase):
 
         def fail_on_extensions(source, target):
             if target == self.extensions:
-                self.assertEqual(self.brewfile.read_text(), "new packages")
+                self.assertEqual(self.brewfile.read_text(), (self.snapshot / "Brewfile").read_text())
                 raise OSError("cannot replace extensions")
             replace(source, target)
 
@@ -81,9 +81,15 @@ class SnapshotTest(unittest.TestCase):
         (manifest / "package.json").write_text(json.dumps({
             "publisher": "test", "name": "parent", "extensionPack": ["test.child"],
         }))
+        partial = Path("snapshot/test.partial")
+        partial.mkdir()
+        (partial / "package.json").write_text(json.dumps({
+            "publisher": "test", "name": "partial",
+            "extensionPack": ["test.standalone", "test.removed"],
+        }))
         code.write_text(
             '#!/bin/sh\nif [ "$1" = --list-extensions ]; then cat snapshot/extensions; '
-            'else echo snapshot/test.parent; fi\n'
+            'elif [ "$2" != test.removed ]; then printf "%s\\n" snapshot/test.parent snapshot/test.partial; fi\n'
         )
         for command in (brew, code):
             command.chmod(0o755)
@@ -94,8 +100,8 @@ class SnapshotTest(unittest.TestCase):
             self.assertIn("+test.parent", preview)
             self.assert_original_files()
         subprocess.run(["make", "snapshot-apply"], env=env, check=True)
-        self.assertEqual(self.brewfile.read_text(), "new packages")
-        self.assertEqual(self.extensions.read_text(), "test.parent\n")
+        self.assertEqual(self.brewfile.read_text(), "new packages\n")
+        self.assertEqual(self.extensions.read_text(), "test.parent\ntest.standalone\n")
 
 
 if __name__ == "__main__":

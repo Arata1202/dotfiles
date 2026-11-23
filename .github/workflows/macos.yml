@@ -38,8 +38,8 @@ jobs:
           test "$(cat "$lock")" = existing
           test ! -L "$HOME/.gitconfig_shared"
           mv "$lock" "$HOME/config.lock.original"
-          printf 'machine-only.tmp\n!.envrc\n' > "$XDG_CONFIG_HOME/git/ignore"
-          git config --global user.name 'Existing User'
+          printf '\357\273\277machine-only.tmp\n!.envrc\n' > "$XDG_CONFIG_HOME/git/ignore"
+          printf '\357\273\277[user]\n\tname = Existing User\n' > "$XDG_CONFIG_HOME/git/config"
           git config --global core.editor nano
           git config --global --add include.path '~/.gitconfig_shared'
           keybindings="$HOME/Library/Application Support/Code/User/keybindings.json"

@@ -52,4 +52,4 @@
 	sh = show
 	st = stash
 	unstage = reset HEAD
-	switch-history = "!branch=$(git --no-pager reflog | awk '$3 == \"checkout:\" && /moving from/ {print $8}' | awk '!a[$0]++' | head | peco) && { [ -z \"$branch\" ] || git switch -- \"$branch\"; }"
+	switch-history = "!branch=$(git reflog --format=%gs HEAD | awk '/^checkout: moving from / && !seen[$NF]++ {print $NF}' | while IFS= read -r ref; do git show-ref --verify --quiet \"refs/heads/$ref\" && printf \"%s\\n\" \"$ref\"; done | head | peco) && { [ -z \"$branch\" ] || git switch -- \"$branch\"; }"

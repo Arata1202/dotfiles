@@ -31,6 +31,6 @@ Edit `homebrew/.Brewfile` and `vscode/extensions` to choose what setup installs.
 make snapshot
 ```
 
-The extension snapshot omits dependencies and pack members installed by the listed extensions.
+The Homebrew snapshot omits PHP and Composer because the mise PHP installation provides both commands. The extension snapshot omits dependencies and pack members installed by the listed extensions. For a partially installed extension-only pack, it lists the installed members individually.
 
 To replace both lists with a fresh snapshot of the current machine, run `make snapshot-apply`.

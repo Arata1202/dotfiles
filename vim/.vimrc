@@ -27,7 +27,6 @@ set number
 set title
 set guioptions+=R
 set shiftwidth=4
-set hlsearch
 set autoindent
 set ruler
 set showmatch

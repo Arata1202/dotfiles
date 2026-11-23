@@ -3,7 +3,9 @@ set -eu
 cd "$(dirname "$0")/.."
 snapshot=$(mktemp -d)
 trap 'rm -rf "$snapshot"' EXIT
-brew bundle dump --file="$snapshot/Brewfile" --no-go --no-vscode
+brew bundle dump --file="$snapshot/brew-dump" --no-go --no-vscode --no-describe
+# The mise PHP installation also provides Composer.
+awk '!/^brew "(php|composer)"(,|$)/' "$snapshot/brew-dump" > "$snapshot/Brewfile"
 python3 scripts/list-extensions.py > "$snapshot/extensions"
 if [[ ${1:-} == --apply ]]; then
     python3 scripts/save-snapshot.py "$snapshot"

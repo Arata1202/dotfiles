@@ -1,4 +1,3 @@
-1yib.rust-bundle
 aaron-bond.better-comments
 anthropic.claude-code
 bmewburn.vscode-intelephense-client
@@ -11,6 +10,7 @@ devsense.phptools-vscode
 docker.docker
 donjayamanne.githistory
 dsznajder.es7-react-js-snippets
+dustypomerleau.rust-syntax
 eamodio.gitlens
 ecmel.vscode-html-css
 esbenp.prettier-vscode
@@ -41,6 +41,7 @@ pkief.material-icon-theme
 pranaygp.vscode-css-peek
 prisma.prisma
 ritwickdey.liveserver
+rust-lang.rust-analyzer
 saoudrizwan.claude-dev
 serayuzgur.crates
 shardulm94.trailing-spaces

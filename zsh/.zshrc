@@ -95,7 +95,7 @@ alias tree='tree -C'
 
 alias c='pbcopy'
 
-alias pwdc='pwd | tr -d "\n" | pbcopy'
+alias pwdc='printf "%s" "$PWD" | pbcopy'
 
 # edit
 alias zshrc='vi ~/.zshrc'
@@ -107,8 +107,10 @@ alias mv='mv -i'
 alias rm='rm -i'
 
 # mysql
-alias ms='mysql.server'
-alias mss='mysql.server start'
+if (( $+commands[mysql.server] )); then
+    alias ms='mysql.server'
+    alias mss='mysql.server start'
+fi
 
 # docker
 alias d='docker'

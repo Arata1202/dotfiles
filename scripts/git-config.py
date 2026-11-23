@@ -1,5 +1,6 @@
 """Load shared Git defaults before the user's global settings."""
 
+from codecs import BOM_UTF8
 import os
 import shutil
 import subprocess
@@ -40,10 +41,14 @@ def update(config, first, check_only):
     replaced = False
     try:
         original = config.read_bytes() if config.exists() else b""
+        bom = BOM_UTF8 if original.startswith(BOM_UTF8) else b""
         if config.exists():
             shutil.copy2(config, lock)
-            if first and original.startswith(header):
-                lock.write_bytes(original[len(header):])
+            body = original[len(bom):]
+            if first and body.startswith(header):
+                body = body[len(header):]
+            if body != original:
+                lock.write_bytes(body)
         else:
             lock.chmod(0o600)
 
@@ -57,7 +62,7 @@ def update(config, first, check_only):
                 result.check_returncode()
 
         remaining = lock.read_bytes()
-        updated = header + remaining if first else remaining
+        updated = bom + (header if first else b"") + remaining
         if updated != original:
             lock.write_bytes(updated)
             os.replace(lock, config)
@@ -70,7 +75,9 @@ def update(config, first, check_only):
 def install_ignore(target):
     defaults = (Path(__file__).resolve().parents[1] / "git/.gitignore_global").read_bytes()
     original = target.read_bytes() if target.exists() else b""
-    existing = set(original.splitlines())
+    bom = BOM_UTF8 if original.startswith(BOM_UTF8) else b""
+    body = original[len(bom):]
+    existing = set(body.splitlines())
     missing = [rule for rule in defaults.splitlines() if rule not in existing]
     if not missing:
         return
@@ -79,7 +86,7 @@ def install_ignore(target):
     with tempfile.NamedTemporaryFile(dir=target.parent, delete=False) as output:
         temporary = Path(output.name)
     try:
-        temporary.write_bytes(b"\n".join(missing) + b"\n" + original)
+        temporary.write_bytes(bom + b"\n".join(missing) + b"\n" + body)
         if target.exists():
             shutil.copystat(target, temporary)
         os.replace(temporary, target)
