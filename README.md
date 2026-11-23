@@ -11,7 +11,7 @@
 
 Install the Xcode Command Line Tools (`xcode-select --install`) and [Homebrew](https://brew.sh/). Follow Homebrew's shell setup instructions and confirm that `git`, `make`, and `brew` are on your PATH.
 
-If your Brewfile includes the Obsidian CLI from `yakitrak/yakitrak`, review its formula and run `brew trust --formula yakitrak/yakitrak/notesmd-cli` before setup. Homebrew resolves its former name, `obsidian-cli`, to `notesmd-cli`. For a third-party cask, use `brew trust --cask owner/tap/name` after reviewing the cask.
+If Homebrew asks you to trust a third-party cask, review it before running `brew trust --cask owner/tap/name`.
 
 Clone into any permanent directory. The installed links point back to this checkout.
 
@@ -24,6 +24,12 @@ make setup
 Setup links the configuration, loads shared Git defaults before your personal settings, installs Homebrew packages and VS Code extensions, and sets Homebrew zsh as your login shell. Setup trusts the checkout’s `mise/config.toml` before installing its tools. The shell change may prompt for your password. If setup reports a link conflict, inspect the named file, move it aside if you want to use the repository version, and rerun setup.
 
 Setup adds shared ignore patterns to Git’s default global ignore file (`$XDG_CONFIG_HOME/git/ignore`, or `~/.config/git/ignore`). Existing rules keep their order and take precedence over added defaults.
+
+### Package management
+
+Use Homebrew for macOS applications, shell utilities, and native libraries used by other packages. OrbStack supplies the Docker CLI, Compose, and Buildx.
+
+Use mise for language runtimes and development tools whose versions affect builds, generated files, or deployment workflows. `mise/config.toml` defines their default versions.
 
 ### Capture the current machine
 
