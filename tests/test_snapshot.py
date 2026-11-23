@@ -34,17 +34,20 @@ class SnapshotTest(unittest.TestCase):
         self.assertEqual(self.brewfile.read_text(), "original .Brewfile")
         self.assertEqual(self.extensions.read_text(), "original extensions")
 
-    def test_second_write_failure_restores_first_file(self):
+    def test_second_write_failure_preserves_both_files(self):
         replace = os.replace
+        writes = 0
 
-        def fail_on_extensions(source, target):
-            if target == self.extensions:
-                self.assertEqual(self.brewfile.read_text(), (self.snapshot / "Brewfile").read_text())
-                raise OSError("cannot replace extensions")
+        def fail_on_second_write(source, target):
+            nonlocal writes
+            if target in (self.brewfile, self.extensions):
+                writes += 1
+                if writes == 2:
+                    raise OSError("simulated write failure")
             replace(source, target)
 
-        with patch("os.replace", fail_on_extensions):
-            with self.assertRaisesRegex(OSError, "cannot replace extensions"):
+        with patch("os.replace", fail_on_second_write):
+            with self.assertRaisesRegex(OSError, "simulated write failure"):
                 save(self.snapshot)
         self.assert_original_files()
 
@@ -74,7 +77,14 @@ class SnapshotTest(unittest.TestCase):
         commands = Path("bin").resolve()
         commands.mkdir()
         brew = commands / "brew"
-        brew.write_text('#!/bin/sh\ncp snapshot/Brewfile "${3#--file=}"\n')
+        brew.write_text("""#!/bin/sh
+for arg do
+    case "$arg" in
+        --file=*) exec cp snapshot/Brewfile "${arg#--file=}" ;;
+    esac
+done
+exit 1
+""")
         code = commands / "code"
         manifest = Path("snapshot/test.parent")
         manifest.mkdir()
