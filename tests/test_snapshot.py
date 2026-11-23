@@ -28,7 +28,9 @@ class SnapshotTest(unittest.TestCase):
         self.snapshot = Path("snapshot")
         self.snapshot.mkdir()
         (self.snapshot / "Brewfile").write_text('new packages\nbrew "php"\nbrew "composer"\nbrew "rbenv/tap/openssl@1.1"\n')
-        (self.snapshot / "extensions").write_text("test.parent\ntest.child\ntest.partial\ntest.outer\ntest.standalone\n")
+        (self.snapshot / "extensions").write_text(
+            "test.parent\ntest.child\ntest.dependency\ntest.partial\ntest.outer\ntest.standalone\n"
+        )
 
     def assert_original_files(self):
         self.assertEqual(self.brewfile.read_text(), "original .Brewfile")
@@ -91,6 +93,12 @@ exit 1
         (manifest / "package.json").write_text(json.dumps({
             "publisher": "test", "name": "parent", "extensionPack": ["test.child"],
         }))
+        standalone = Path("snapshot/test.standalone")
+        standalone.mkdir()
+        (standalone / "package.json").write_text(json.dumps({
+            "publisher": "test", "name": "standalone",
+            "extensionDependencies": ["test.dependency"],
+        }))
         partial = Path("snapshot/test.partial")
         partial.mkdir()
         (partial / "package.json").write_text(json.dumps({
@@ -102,10 +110,14 @@ exit 1
         (outer / "package.json").write_text(json.dumps({
             "publisher": "test", "name": "outer", "extensionPack": ["test.partial"],
         }))
-        code.write_text(
-            '#!/bin/sh\nif [ "$1" = --list-extensions ]; then cat snapshot/extensions; '
-            'elif [ "$2" != test.removed ]; then printf "%s\\n" snapshot/test.parent snapshot/test.partial snapshot/test.outer; fi\n'
-        )
+        code.write_text("""#!/bin/sh
+if [ "$1" = --list-extensions ]; then
+    exec cat snapshot/extensions
+fi
+for name do
+    if [ -d "snapshot/$name" ]; then echo "snapshot/$name"; fi
+done
+""")
         for command in (brew, code):
             command.chmod(0o755)
         env = dict(os.environ, PATH=str(commands) + os.pathsep + os.environ["PATH"])

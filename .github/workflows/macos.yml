@@ -54,6 +54,8 @@ jobs:
           test "$HOME/.vimrc" -ef vim/.vimrc
           test "$HOME/.zshrc" -ef zsh/.zshrc
           test "$HOME/.zprofile" -ef zsh/.zprofile
+          echo 'local_brew_prefix=$(brew --prefix)' > "$HOME/.zprofile.local"
+          env -i HOME="$HOME" PATH=/usr/bin:/bin:/usr/sbin:/sbin /bin/zsh -dlc '[[ $local_brew_prefix == /opt/homebrew ]]'
           test "$HOME/.config/mise/config.toml" -ef mise/config.toml
           test "$HOME/Library/Application Support/Code/User/settings.json" -ef vscode/settings.json
           test "$(git config --get-all include.path)" = '~/.gitconfig_shared'
