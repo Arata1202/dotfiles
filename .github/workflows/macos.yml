@@ -50,6 +50,8 @@ jobs:
           cp "$XDG_CONFIG_HOME/git/ignore" "$HOME/ignore.first"
           make link
           cmp "$HOME/ignore.first" "$XDG_CONFIG_HOME/git/ignore"
+          test "$HOME/.Brewfile" -ef homebrew/.Brewfile
+          test "$HOME/.vimrc" -ef vim/.vimrc
           test "$HOME/.zshrc" -ef zsh/.zshrc
           test "$HOME/.zprofile" -ef zsh/.zprofile
           test "$HOME/.config/mise/config.toml" -ef mise/config.toml
