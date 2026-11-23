@@ -69,7 +69,7 @@ class SnapshotTest(unittest.TestCase):
     def test_snapshot_previews_until_explicitly_applied(self):
         shutil.copy(ROOT / "Makefile", ".")
         Path("scripts").mkdir()
-        for name in ("update.sh", "save-snapshot.py", "list-extensions.py"):
+        for name in ("snapshot.sh", "save-snapshot.py", "list-extensions.py"):
             shutil.copy(ROOT / "scripts" / name, "scripts")
         commands = Path("bin").resolve()
         commands.mkdir()
