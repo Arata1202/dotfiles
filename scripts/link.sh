@@ -45,6 +45,9 @@ for phase in check apply; do
     if [[ -f "$repo/local/.zprofile.local" ]]; then
         link_file local/.zprofile.local "$HOME/.zprofile.local"
     fi
+    if [[ $phase == check ]]; then
+        python3 "$repo/scripts/git-config.py" --check
+    fi
 done
 
 keybindings="$code_user/keybindings.json"

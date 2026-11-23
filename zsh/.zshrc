@@ -164,7 +164,7 @@ alias prt='pnpm run test'
 # flutter
 alias fpg='flutter pub get'
 alias fr='flutter run'
-alias fc='flutter clean'
+alias fclean='flutter clean'
 
 # python
 alias py='python3'

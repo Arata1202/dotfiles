@@ -24,6 +24,12 @@ jobs:
           test "$(cat "$HOME/.config")" = existing
           test ! -L "$HOME/.gitconfig_shared"
           mv "$HOME/.config" "$HOME/.config.original"
+          mkdir -p "$XDG_CONFIG_HOME"
+          echo existing > "$XDG_CONFIG_HOME/git"
+          if make link; then exit 1; fi
+          test "$(cat "$XDG_CONFIG_HOME/git")" = existing
+          test ! -L "$HOME/.gitconfig_shared"
+          mv "$XDG_CONFIG_HOME/git" "$HOME/git.original"
           git config --global user.name 'Existing User'
           git config --global core.editor nano
           git config --global --add include.path '~/.gitconfig_shared'
