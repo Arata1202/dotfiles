@@ -1,5 +1,9 @@
 # .zprofile.local
-[ -f ~/.zprofile.local ] && source ~/.zprofile.local
+if [[ -f "${ZDOTDIR:-$HOME}/.zprofile.local" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zprofile.local"
+elif [[ -f "$HOME/.zprofile.local" ]]; then
+    source "$HOME/.zprofile.local"
+fi
 
 # homebrew
 if [[ -x /opt/homebrew/bin/brew ]]; then

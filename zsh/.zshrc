@@ -98,8 +98,8 @@ alias c='pbcopy'
 alias pwdc='printf "%s" "$PWD" | pbcopy'
 
 # edit
-alias zshrc='vi ~/.zshrc'
-alias reload='source ~/.zshrc'
+alias zshrc='vi "${ZDOTDIR:-$HOME}/.zshrc"'
+alias reload='source "${ZDOTDIR:-$HOME}/.zshrc"'
 
 # safety
 alias cp='cp -i'

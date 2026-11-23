@@ -18,21 +18,31 @@ def installed_roots():
         return []
     children = {name.lower(): set() for name in installed}
     partial_packs = set()
+    pack_parents = {}
     for location in locate(installed):
         manifest = json.loads((Path(location) / "package.json").read_text())
         name = f"{manifest['publisher']}.{manifest['name']}".lower()
         if name in children:
             pack = set(member.lower() for member in manifest.get("extensionPack", []))
             missing = pack.difference(children)
-            if missing and not any(manifest.get(key) for key in (
+            if pack and not any(manifest.get(key) for key in (
                 "main", "browser", "contributes", "extensionDependencies",
             )):
+                for member in pack:
+                    pack_parents.setdefault(member, set()).add(name)
                 # Built-in extensions are locatable but absent from --list-extensions.
-                if len(locate(sorted(missing))) < len(missing):
+                if missing and len(locate(sorted(missing))) < len(missing):
                     partial_packs.add(name)
             for field in ("extensionPack", "extensionDependencies"):
                 children[name].update(dep.lower() for dep in manifest.get(field, []))
             children[name].intersection_update(children)
+
+    pending = list(partial_packs)
+    while pending:
+        for parent in pack_parents.get(pending.pop(), ()):
+            if parent not in partial_packs:
+                partial_packs.add(parent)
+                pending.append(parent)
 
     for name in partial_packs:
         del children[name]

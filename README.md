@@ -11,6 +11,8 @@
 
 Install the Xcode Command Line Tools (`xcode-select --install`) and [Homebrew](https://brew.sh/). Follow Homebrew's shell setup instructions and confirm that `git`, `make`, and `brew` are on your PATH.
 
+If your Brewfile includes the Obsidian CLI from `yakitrak/yakitrak`, review its formula and run `brew trust --formula yakitrak/yakitrak/notesmd-cli` before setup. Homebrew resolves its former name, `obsidian-cli`, to `notesmd-cli`. For a third-party cask, use `brew trust --cask owner/tap/name` after reviewing the cask.
+
 Clone into any permanent directory. The installed links point back to this checkout.
 
 ```bash
@@ -31,6 +33,6 @@ Edit `homebrew/.Brewfile` and `vscode/extensions` to choose what setup installs.
 make snapshot
 ```
 
-The Homebrew snapshot omits PHP and Composer because the mise PHP installation provides both commands. The extension snapshot omits dependencies and pack members installed by the listed extensions. For a partially installed extension-only pack, it lists the installed members individually.
+The Homebrew snapshot omits PHP and Composer because the mise PHP installation provides both commands. It also skips the legacy OpenSSL 1.1 formula. The extension snapshot omits dependencies and pack members installed by the listed extensions. For a partially installed extension-only pack, it lists the installed members individually.
 
 To replace both lists with a fresh snapshot of the current machine, run `make snapshot-apply`.

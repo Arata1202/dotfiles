@@ -29,7 +29,7 @@ terraform = "1.17.2"
 azure-cli = "https://github.com/mise-plugins/mise-azure-cli.git"
 cocoapods = "https://github.com/mise-plugins/mise-cocoapods.git"
 flutter = "https://github.com/mise-plugins/mise-flutter.git"
-php = "https://github.com/asdf-community/asdf-php"
+php = "https://github.com/asdf-community/asdf-php#52c669a77f08ec81caff47d560476d2ba1b176b9"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node"]

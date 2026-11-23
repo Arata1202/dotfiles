@@ -27,8 +27,8 @@ class SnapshotTest(unittest.TestCase):
             target.write_text("original " + target.name)
         self.snapshot = Path("snapshot")
         self.snapshot.mkdir()
-        (self.snapshot / "Brewfile").write_text('new packages\nbrew "php"\nbrew "composer"\n')
-        (self.snapshot / "extensions").write_text("test.parent\ntest.child\ntest.partial\ntest.standalone\n")
+        (self.snapshot / "Brewfile").write_text('new packages\nbrew "php"\nbrew "composer"\nbrew "rbenv/tap/openssl@1.1"\n')
+        (self.snapshot / "extensions").write_text("test.parent\ntest.child\ntest.partial\ntest.outer\ntest.standalone\n")
 
     def assert_original_files(self):
         self.assertEqual(self.brewfile.read_text(), "original .Brewfile")
@@ -87,9 +87,14 @@ class SnapshotTest(unittest.TestCase):
             "publisher": "test", "name": "partial",
             "extensionPack": ["test.standalone", "test.removed"],
         }))
+        outer = Path("snapshot/test.outer")
+        outer.mkdir()
+        (outer / "package.json").write_text(json.dumps({
+            "publisher": "test", "name": "outer", "extensionPack": ["test.partial"],
+        }))
         code.write_text(
             '#!/bin/sh\nif [ "$1" = --list-extensions ]; then cat snapshot/extensions; '
-            'elif [ "$2" != test.removed ]; then printf "%s\\n" snapshot/test.parent snapshot/test.partial; fi\n'
+            'elif [ "$2" != test.removed ]; then printf "%s\\n" snapshot/test.parent snapshot/test.partial snapshot/test.outer; fi\n'
         )
         for command in (brew, code):
             command.chmod(0o755)

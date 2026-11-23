@@ -13,6 +13,7 @@ jobs:
         run: |
           set -eu
           export HOME="$(mktemp -d)"
+          unset ZDOTDIR
           export XDG_CONFIG_HOME="$HOME/.config"
           echo existing > "$HOME/.zshrc"
           if make link; then exit 1; fi
@@ -65,5 +66,9 @@ jobs:
           test "$(git config --get alias.br)" = branch
           test "$(git config --get core.editor)" = nano
           test "$(git config --global user.name)" = 'Existing User'
+          export ZDOTDIR="$HOME/custom zsh"
+          make link
+          test "$ZDOTDIR/.zshrc" -ef zsh/.zshrc
+          test "$ZDOTDIR/.zprofile" -ef zsh/.zprofile
       - name: Verify snapshot saving and rollback
         run: python3 tests/test_snapshot.py
