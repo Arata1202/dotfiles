@@ -50,13 +50,4 @@ for phase in check apply; do
     fi
 done
 
-keybindings="$code_user/keybindings.json"
-if [[ -L "$keybindings" && "$keybindings" -ef "$repo/vscode/keybindings.json" ]]; then
-    copy=$(mktemp "$code_user/.keybindings.XXXXXX")
-    trap 'rm -f "$copy"' EXIT
-    cat "$keybindings" > "$copy"
-    mv -f "$copy" "$keybindings"
-    trap - EXIT
-fi
-
 python3 "$repo/scripts/git-config.py"
