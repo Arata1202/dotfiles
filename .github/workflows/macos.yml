@@ -39,7 +39,7 @@ jobs:
           test "$(cat "$lock")" = existing
           test ! -L "$HOME/.gitconfig_shared"
           mv "$lock" "$HOME/config.lock.original"
-          printf '\357\273\277machine-only.tmp\n!.envrc\n' > "$XDG_CONFIG_HOME/git/ignore"
+          printf '\357\273\277machine-only.tmp\n!.DS_Store\n' > "$XDG_CONFIG_HOME/git/ignore"
           printf '\357\273\277[user]\n\tname = Existing User\n' > "$XDG_CONFIG_HOME/git/config"
           git config --global core.editor nano
           git config --global --add include.path '~/.gitconfig_shared'
@@ -47,7 +47,7 @@ jobs:
           git init -q "$HOME/check-ignore"
           git -C "$HOME/check-ignore" check-ignore --no-index machine-only.tmp
           git -C "$HOME/check-ignore" check-ignore --no-index example~
-          if git -C "$HOME/check-ignore" check-ignore --no-index -q .envrc; then exit 1; fi
+          if git -C "$HOME/check-ignore" check-ignore --no-index -q .DS_Store; then exit 1; fi
           cp "$XDG_CONFIG_HOME/git/ignore" "$HOME/ignore.first"
           make link
           cmp "$HOME/ignore.first" "$XDG_CONFIG_HOME/git/ignore"
