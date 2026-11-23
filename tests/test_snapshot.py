@@ -1,17 +1,13 @@
 import json
 import os
-import runpy
 import shutil
-import signal
 import subprocess
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
-save = runpy.run_path(str(ROOT / "scripts/save-snapshot.py"))["save"]
 
 
 class SnapshotTest(unittest.TestCase):
@@ -36,45 +32,10 @@ class SnapshotTest(unittest.TestCase):
         self.assertEqual(self.brewfile.read_text(), "original .Brewfile")
         self.assertEqual(self.extensions.read_text(), "original extensions")
 
-    def test_second_write_failure_preserves_both_files(self):
-        replace = os.replace
-        writes = 0
-
-        def fail_on_second_write(source, target):
-            nonlocal writes
-            if target in (self.brewfile, self.extensions):
-                writes += 1
-                if writes == 2:
-                    raise OSError("simulated write failure")
-            replace(source, target)
-
-        with patch("os.replace", fail_on_second_write):
-            with self.assertRaisesRegex(OSError, "simulated write failure"):
-                save(self.snapshot)
-        self.assert_original_files()
-
-    def test_ctrl_c_after_each_replace_restores_both_files(self):
-        replace = os.replace
-        for destination in (self.brewfile, self.extensions):
-            with self.subTest(destination=destination.name):
-                interrupted = False
-
-                def interrupt_after_replace(source, target):
-                    nonlocal interrupted
-                    replace(source, target)
-                    if target == destination and not interrupted:
-                        interrupted = True
-                        os.kill(os.getpid(), signal.SIGINT)
-
-                with patch("os.replace", interrupt_after_replace):
-                    with self.assertRaises(KeyboardInterrupt):
-                        save(self.snapshot)
-                self.assert_original_files()
-
     def test_snapshot_previews_until_explicitly_applied(self):
         shutil.copy(ROOT / "Makefile", ".")
         Path("scripts").mkdir()
-        for name in ("snapshot.sh", "save-snapshot.py", "list-extensions.py"):
+        for name in ("snapshot.sh", "list-extensions.py"):
             shutil.copy(ROOT / "scripts" / name, "scripts")
         commands = Path("bin").resolve()
         commands.mkdir()

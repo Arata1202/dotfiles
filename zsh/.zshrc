@@ -27,6 +27,7 @@ alias gm='git merge'
 alias gms='git merge --squash'
 ## checkout
 alias gco='git switch'
+alias gcb='git switch -c'
 alias gsw='git switch'
 alias gsc='git switch -c'
 ## status
@@ -60,17 +61,25 @@ alias gcp='git cherry-pick'
 ## history
 alias ghi='git switch-history'
 
-# terminal
-cdls ()
-{
-    builtin cd "$@" && ls
-}
-
 # ls
 export LSCOLORS=gxfxcxdxbxegedabagacad
 alias ls='ls --color=auto -GF'
 alias ll='ls -alhF'
 alias la='ls -a'
+
+# terminal
+cdls ()
+{
+    builtin cd "$@" && ls
+}
+alias cd='cdls'
+
+# diff
+if (( $+commands[colordiff] )); then
+    alias diff='colordiff -u'
+else
+    alias diff='diff -u'
+fi
 
 # mkdir
 alias mkdir='mkdir -p'
@@ -95,6 +104,10 @@ alias reload='source "$HOME/.zshrc"'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
+
+# mysql
+alias ms='mysql.server'
+alias mss='mysql.server start'
 
 # docker
 alias d='docker'
@@ -141,7 +154,7 @@ alias nrt='npm run test'
 # pnpm
 alias pi='pnpm install'
 alias pu='pnpm update'
-alias pstart='pnpm start'
+alias ps='pnpm start'
 alias prb='pnpm run build'
 alias prd='pnpm run dev'
 alias prt='pnpm run test'
@@ -149,7 +162,7 @@ alias prt='pnpm run test'
 # flutter
 alias fpg='flutter pub get'
 alias fr='flutter run'
-alias fclean='flutter clean'
+alias fc='flutter clean'
 
 # python
 alias py='python3'

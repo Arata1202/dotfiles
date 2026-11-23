@@ -2,7 +2,7 @@
 set -eu
 echo "Installing packages listed in mise/config.toml"
 repo=$(cd "$(dirname "$0")/.." && pwd -P)
-config="$HOME/.config/mise/config.toml"
+config="${XDG_CONFIG_HOME:-$HOME/.config}/mise/config.toml"
 if [[ ! "$config" -ef "$repo/mise/config.toml" ]]; then
     echo "Run make link before installing mise tools." >&2
     exit 1

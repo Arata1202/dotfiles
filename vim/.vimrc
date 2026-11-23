@@ -1,3 +1,7 @@
+let g:indentLine_color_term = 239
+let g:indentLine_color_gui = '#708090'
+let g:indentLine_char = '¦'
+
 "----------------------------------------
 " 検索
 "----------------------------------------
@@ -21,6 +25,7 @@ syntax on
 set number
 " タイトルを表示
 set title
+set guioptions+=R
 set shiftwidth=4
 set autoindent
 set ruler

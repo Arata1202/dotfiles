@@ -13,17 +13,17 @@ jobs:
         run: |
           set -eu
           export HOME="$(mktemp -d)"
-          export XDG_CONFIG_HOME="$HOME/.config"
+          export XDG_CONFIG_HOME="$HOME/custom-config"
           echo existing > "$HOME/.zshrc"
           if make link; then exit 1; fi
           test "$(cat "$HOME/.zshrc")" = existing
           test ! -L "$HOME/.gitconfig_shared"
           mv "$HOME/.zshrc" "$HOME/.zshrc.original"
-          echo existing > "$HOME/.config"
+          echo existing > "$XDG_CONFIG_HOME"
           if make link; then exit 1; fi
-          test "$(cat "$HOME/.config")" = existing
+          test "$(cat "$XDG_CONFIG_HOME")" = existing
           test ! -L "$HOME/.gitconfig_shared"
-          mv "$HOME/.config" "$HOME/.config.original"
+          mv "$XDG_CONFIG_HOME" "$HOME/.config.original"
           mkdir -p "$XDG_CONFIG_HOME"
           echo existing > "$XDG_CONFIG_HOME/git"
           if make link; then exit 1; fi
@@ -56,11 +56,11 @@ jobs:
           test "$HOME/.zprofile" -ef zsh/.zprofile
           echo 'local_brew_prefix=$(brew --prefix)' > "$HOME/.zprofile.local"
           env -i HOME="$HOME" PATH=/usr/bin:/bin:/usr/sbin:/sbin /bin/zsh -dlc '[[ $local_brew_prefix == /opt/homebrew ]]'
-          test "$HOME/.config/mise/config.toml" -ef mise/config.toml
+          test "$XDG_CONFIG_HOME/mise/config.toml" -ef mise/config.toml
           test "$HOME/Library/Application Support/Code/User/settings.json" -ef vscode/settings.json
           test "$(git config --get-all include.path)" = '~/.gitconfig_shared'
           test "$(git config --get alias.br)" = branch
           test "$(git config --get core.editor)" = nano
           test "$(git config --global user.name)" = 'Existing User'
-      - name: Verify snapshot saving and rollback
+      - name: Verify snapshot preview and apply
         run: python3 tests/test_snapshot.py
