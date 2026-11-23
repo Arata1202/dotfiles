@@ -63,5 +63,14 @@ jobs:
           make link
           test "$ZDOTDIR/.zshrc" -ef zsh/.zshrc
           test "$ZDOTDIR/.zprofile" -ef zsh/.zprofile
+      - name: Verify mise link with a custom XDG config directory
+        shell: bash
+        run: |
+          set -eu
+          export HOME="$(mktemp -d)"
+          export XDG_CONFIG_HOME="$HOME/custom config"
+          make link
+          test "$XDG_CONFIG_HOME/mise/config.toml" -ef mise/config.toml
+          test ! -e "$HOME/.config/mise/config.toml"
       - name: Verify snapshot saving and rollback
         run: python3 tests/test_snapshot.py

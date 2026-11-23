@@ -37,7 +37,7 @@ link_file() {
 for phase in check apply; do
     link_file git/.gitconfig_shared "$HOME/.gitconfig_shared"
     link_file homebrew/.Brewfile "$HOME/.Brewfile"
-    link_file mise/config.toml "$HOME/.config/mise/config.toml"
+    link_file mise/config.toml "${XDG_CONFIG_HOME:-$HOME/.config}/mise/config.toml"
     link_file vim/.vimrc "$HOME/.vimrc"
     link_file vscode/settings.json "$code_user/settings.json"
     link_file zsh/.zprofile "$zsh_dir/.zprofile"
