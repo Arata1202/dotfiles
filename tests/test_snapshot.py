@@ -58,6 +58,14 @@ class SnapshotTest(unittest.TestCase):
             self.assertEqual(self.brewfile.read_text(), "original .Brewfile")
             self.extensions.unlink()
 
+    def test_cycle_supersedes_previously_visited_dependencies(self):
+        explicit_roots = runpy.run_path(str(ROOT / "scripts/list-extensions.py"))["explicit_roots"]
+        dependencies = {
+            "a": {"b", "c", "d"}, "b": set(), "c": set(), "d": set(),
+            "x": {"y"}, "y": {"x", "a"}, "standalone": set(),
+        }
+        self.assertEqual(explicit_roots(dependencies), ["standalone", "x"])
+
     def test_snapshot_previews_until_explicitly_applied(self):
         shutil.copy(ROOT / "Makefile", ".")
         Path("scripts").mkdir()

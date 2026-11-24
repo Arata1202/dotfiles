@@ -14,10 +14,20 @@ grep -Fxq "$ZSH_PATH" /etc/shells || status=$?
 case $status in
     0) ;;
     1)
-        last_byte=$(tail -c 1 /etc/shells)
-        separator=
-        if [[ -n "$last_byte" ]]; then separator=$'\n'; fi
-        printf '%s%s\n' "$separator" "$ZSH_PATH" | sudo tee -a /etc/shells
+        sudo /usr/bin/python3 -I -c '
+import fcntl
+import os
+import sys
+
+entry = os.fsencode(sys.argv[1])
+with open("/etc/shells", "r+b") as shells:
+    fcntl.flock(shells, fcntl.LOCK_EX)
+    contents = shells.read()
+    if entry not in contents.split(b"\n"):
+        if contents and not contents.endswith(b"\n"):
+            shells.write(b"\n")
+        shells.write(entry + b"\n")
+' "$ZSH_PATH"
         ;;
     *) exit "$status" ;;
 esac

@@ -48,19 +48,27 @@ def installed_roots():
         del children[name]
     for members in children.values():
         members.difference_update(partial_packs)
-    bundled = set().union(*children.values())
-    roots = []
+    return explicit_roots(children)
+
+
+def explicit_roots(children):
+    roots = set()
     covered = set()
-    for name in sorted(children, key=lambda name: (name in bundled, -len(children[name]), name)):
+    for name in sorted(children):
         if name in covered:
             continue
-        roots.append(name)
+        reachable = set()
         pending = [name]
         while pending:
             current = pending.pop()
-            if current not in covered:
-                covered.add(current)
+            if current not in reachable:
+                reachable.add(current)
                 pending.extend(children[current])
+        # A newly discovered parent supersedes any earlier root it installs,
+        # including a representative reached through another member of a cycle.
+        roots.difference_update(reachable)
+        roots.add(name)
+        covered.update(reachable)
     return sorted(roots)
 
 
