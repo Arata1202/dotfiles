@@ -1,10 +1,12 @@
 import json
 import os
+import runpy
 import shutil
 import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,7 +25,7 @@ class SnapshotTest(unittest.TestCase):
             target.write_text("original " + target.name)
         self.snapshot = Path("snapshot")
         self.snapshot.mkdir()
-        (self.snapshot / "Brewfile").write_text('new packages\nbrew "php"\nbrew "composer"\nbrew "rbenv/tap/openssl@1.1"\n')
+        (self.snapshot / "Brewfile").write_text('new packages\nbrew "php"\nbrew "php@8.3"\nbrew "composer"\nbrew "rbenv/tap/openssl@1.1"\n')
         (self.snapshot / "extensions").write_text(
             "test.parent\ntest.child\ntest.dependency\ntest.partial\ntest.outer\ntest.standalone\n"
         )
@@ -32,10 +34,34 @@ class SnapshotTest(unittest.TestCase):
         self.assertEqual(self.brewfile.read_text(), "original .Brewfile")
         self.assertEqual(self.extensions.read_text(), "original extensions")
 
+    def test_second_replace_failure_restores_first_manifest(self):
+        apply = runpy.run_path(str(ROOT / "scripts/apply-snapshot.py"))["apply"]
+        replace = os.replace
+
+        def fail_second(source, destination):
+            if destination == Path("vscode/extensions"):
+                raise PermissionError("second destination is protected")
+            replace(source, destination)
+
+        with patch("os.replace", side_effect=fail_second), self.assertRaises(PermissionError):
+            apply(self.snapshot)
+        self.assert_original_files()
+
+    def test_symlink_destination_is_preserved(self):
+        apply = runpy.run_path(str(ROOT / "scripts/apply-snapshot.py"))["apply"]
+        self.extensions.unlink()
+        for target in ("absent", str(self.brewfile)):
+            self.extensions.symlink_to(target)
+            with self.assertRaises(OSError):
+                apply(self.snapshot)
+            self.assertTrue(self.extensions.is_symlink())
+            self.assertEqual(self.brewfile.read_text(), "original .Brewfile")
+            self.extensions.unlink()
+
     def test_snapshot_previews_until_explicitly_applied(self):
         shutil.copy(ROOT / "Makefile", ".")
         Path("scripts").mkdir()
-        for name in ("snapshot.sh", "list-extensions.py"):
+        for name in ("snapshot.sh", "list-extensions.py", "apply-snapshot.py"):
             shutil.copy(ROOT / "scripts" / name, "scripts")
         commands = Path("bin").resolve()
         commands.mkdir()

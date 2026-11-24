@@ -1,17 +1,17 @@
 #!/bin/bash
 set -eu
 
-repo=$(cd "$(dirname "$0")/.." && pwd -P)
+repo=$(CDPATH= cd -- "$(dirname "$0")/.." && pwd -P)
 code_user="$HOME/Library/Application Support/Code/User"
 
 link_file() {
     local source="$repo/$1" target="$2"
-    if [[ -L "$target" && "$target" -ef "$source" ]]; then
-        return 0
-    fi
     if [[ ! -f "$source" ]]; then
         echo "Missing source: $source" >&2
         return 1
+    fi
+    if [[ -L "$target" && "$target" -ef "$source" ]]; then
+        return 0
     fi
     if [[ -e "$target" || -L "$target" ]]; then
         echo "Link conflict: $target (expected $source)" >&2
@@ -19,7 +19,7 @@ link_file() {
     fi
     if [[ $phase == apply ]]; then
         mkdir -p "$(dirname "$target")"
-        ln -s "$source" "$target"
+        python3 -c 'import os, sys; os.symlink(sys.argv[1], sys.argv[2])' "$source" "$target"
     else
         local parent
         parent=$(dirname "$target")
@@ -30,6 +30,10 @@ link_file() {
             fi
             parent=$(dirname "$parent")
         done
+        if [[ ! -w "$parent" || ! -x "$parent" ]]; then
+            echo "Cannot create $target under $parent" >&2
+            return 1
+        fi
     fi
 }
 

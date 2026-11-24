@@ -26,6 +26,9 @@ def update(config, first, check_only):
     if not first and not config.exists():
         return
 
+    if config.exists() and not os.access(config, os.W_OK):
+        sys.exit(f"Git config is read-only: {config}")
+
     lock = config.with_name(config.name + ".lock")
     if check_only:
         if os.path.lexists(lock):
@@ -95,13 +98,14 @@ def install_ignore(target):
 if __name__ == "__main__":
     xdg = Path(os.environ.get("XDG_CONFIG_HOME") or Path.home() / ".config")
     ignore = xdg / "git/ignore"
-    paths = subprocess.check_output(["git", "var", "GIT_CONFIG_GLOBAL"], text=True)
+    output = subprocess.check_output(["git", "var", "GIT_CONFIG_GLOBAL"])
+    paths = [Path(os.fsdecode(line)) for line in output.split(b"\n") if line]
     check_only = sys.argv[1:] == ["--check"]
     if check_only:
         check_path(ignore)
-        for path in paths.splitlines():
-            check_path(Path(path))
-    configs = dict.fromkeys(Path(path).resolve() for path in paths.splitlines())
+        for path in paths:
+            check_path(path)
+    configs = dict.fromkeys(path.resolve() for path in paths)
     for index, config in enumerate(configs):
         update(config, first=index == 0, check_only=check_only)
     if not check_only:

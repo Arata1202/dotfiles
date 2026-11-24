@@ -23,8 +23,8 @@ terraform = "1.17.2"
 xcodegen = "2.48.0"
 
 [plugins]
-azure-cli = "https://github.com/mise-plugins/mise-azure-cli.git"
-flutter = "https://github.com/mise-plugins/mise-flutter.git"
+azure-cli = "https://github.com/mise-plugins/mise-azure-cli.git#4735c27817f5720f5df7099345fbe6b697059594"
+flutter = "https://github.com/mise-plugins/mise-flutter.git#d73606641938341b8b17bd3e2859a5267bb89bd0"
 php = "https://github.com/asdf-community/asdf-php#52c669a77f08ec81caff47d560476d2ba1b176b9"
 
 [settings]

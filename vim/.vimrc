@@ -36,8 +36,30 @@ set list
 set listchars=tab:>_,trail:~,extends:>,precedes:<
 " ファイル内にあるタブ文字の表示幅
 set tabstop=4
-inoremap { {}<LEFT>
-inoremap [ []<LEFT>
-inoremap ( ()<LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
+
+function! s:ClosePair(char) abort
+    return getline('.')[col('.') - 1] ==# a:char ? "\<Right>" : a:char
+endfunction
+
+function! s:InsertQuote(char) abort
+    let before = strpart(getline('.'), 0, col('.') - 1)
+    if strlen(matchstr(before, '\\*$')) % 2 == 1
+        return a:char
+    endif
+    if getline('.')[col('.') - 1] ==# a:char
+        return "\<Right>"
+    endif
+    if before =~# '\k$'
+        return a:char
+    endif
+    return a:char . a:char . "\<Left>"
+endfunction
+
+inoremap { {}<Left>
+inoremap [ []<Left>
+inoremap ( ()<Left>
+inoremap } <C-R>=<SID>ClosePair('}')<CR>
+inoremap ] <C-R>=<SID>ClosePair(']')<CR>
+inoremap ) <C-R>=<SID>ClosePair(')')<CR>
+inoremap " <C-R>=<SID>InsertQuote('"')<CR>
+inoremap ' <C-R>=<SID>InsertQuote("'")<CR>

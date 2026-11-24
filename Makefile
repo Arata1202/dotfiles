@@ -1,11 +1,10 @@
-setup:
+.NOTPARALLEL:
+
+setup: check-tools link brew code mise zsh
+
+check-tools:
 	@command -v brew >/dev/null || { echo "Install Homebrew and add brew to PATH before setup." >&2; exit 1; }
 	@command -v git >/dev/null || { echo "Install Git before setup." >&2; exit 1; }
-	scripts/link.sh
-	scripts/brew.sh
-	scripts/code.sh
-	scripts/mise.sh
-	scripts/zsh.sh
 
 brew:
 	scripts/brew.sh
@@ -28,4 +27,4 @@ snapshot:
 snapshot-apply:
 	scripts/snapshot.sh --apply
 
-.PHONY: setup brew code link mise zsh snapshot snapshot-apply
+.PHONY: setup check-tools brew code link mise zsh snapshot snapshot-apply

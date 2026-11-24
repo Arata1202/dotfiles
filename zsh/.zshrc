@@ -9,8 +9,8 @@ if (( $+commands[direnv] )); then
 fi
 
 # makefile
-alias mk='make -j'
-alias remake='make fclean && make -j'
+alias mk='make -j4'
+alias remake='make fclean && make -j4'
 
 # git
 alias g='git'
@@ -54,7 +54,7 @@ alias grsm='git reset --mixed'
 alias grsh='git reset --hard'
 ## log
 alias gl='git log'
-alias glg='git log --graph --abbrev-commit --date=iso '
+alias glg='git log --graph --abbrev-commit --date=iso'
 alias glo='git log --oneline'
 ## cherry-pick
 alias gcp='git cherry-pick'
@@ -70,7 +70,8 @@ alias la='ls -a'
 # terminal
 cdls ()
 {
-    builtin cd "$@" && ls
+    builtin cd "$@" || return $?
+    ls || true
 }
 alias cd='cdls'
 
@@ -154,7 +155,7 @@ alias nrt='npm run test'
 # pnpm
 alias pi='pnpm install'
 alias pu='pnpm update'
-alias ps='pnpm start'
+alias pns='pnpm start'
 alias prb='pnpm run build'
 alias prd='pnpm run dev'
 alias prt='pnpm run test'
@@ -162,7 +163,7 @@ alias prt='pnpm run test'
 # flutter
 alias fpg='flutter pub get'
 alias fr='flutter run'
-alias fc='flutter clean'
+alias fclean='flutter clean'
 
 # python
 alias py='python3'
