@@ -38,7 +38,7 @@ link_path() {
 }
 
 for phase in check apply; do
-    for skill in ocr-review ocr-scan; do
+    for skill in ios-qa ocr-review ocr-scan; do
         link_path "codex/skills/$skill" "${CODEX_HOME:-$HOME/.codex}/skills/$skill" directory
     done
     link_path git/.gitconfig_shared "$HOME/.gitconfig_shared"

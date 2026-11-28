@@ -23,7 +23,7 @@ cd dotfiles
 make setup
 ```
 
-Setup links the configuration and the Codex skills `ocr-review` (diffs) and `ocr-scan` (whole repositories), loads shared Git defaults before your personal settings, installs Homebrew packages and VS Code extensions, and sets Homebrew zsh as your login shell. Setup trusts the checkout’s `mise/config.toml` before installing its tools. The shell change may prompt for your password. If setup reports a link conflict, inspect the named file, move it aside if you want to use the repository version, and rerun setup.
+Setup links the configuration and the Codex skills `ios-qa` (iOS app testing), `ocr-review` (diffs), and `ocr-scan` (whole repositories), loads shared Git defaults before your personal settings, installs Homebrew packages and VS Code extensions, and sets Homebrew zsh as your login shell. Setup trusts the checkout’s `mise/config.toml` before installing its tools. The shell change may prompt for your password. If setup reports a link conflict, inspect the named file, move it aside if you want to use the repository version, and rerun setup.
 
 To run a new review or scan, install the OpenCodeReview CLI (`ocr`) and configure an LLM provider for it.
 
