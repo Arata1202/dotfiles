@@ -4,9 +4,9 @@ set -eu
 repo=$(CDPATH= cd -- "$(dirname "$0")/.." && pwd -P)
 code_user="$HOME/Library/Application Support/Code/User"
 
-link_file() {
+link_path() {
     local source="$repo/$1" target="$2"
-    if [[ ! -f "$source" ]]; then
+    if [[ ${3:-file} == directory && ! -d "$source" || ${3:-file} == file && ! -f "$source" ]]; then
         echo "Missing source: $source" >&2
         return 1
     fi
@@ -38,13 +38,16 @@ link_file() {
 }
 
 for phase in check apply; do
-    link_file git/.gitconfig_shared "$HOME/.gitconfig_shared"
-    link_file homebrew/.Brewfile "$HOME/.Brewfile"
-    link_file mise/config.toml "${XDG_CONFIG_HOME:-$HOME/.config}/mise/config.toml"
-    link_file vim/.vimrc "$HOME/.vimrc"
-    link_file vscode/settings.json "$code_user/settings.json"
-    link_file zsh/.zprofile "$HOME/.zprofile"
-    link_file zsh/.zshrc "$HOME/.zshrc"
+    for skill in ocr-review ocr-scan; do
+        link_path "codex/skills/$skill" "${CODEX_HOME:-$HOME/.codex}/skills/$skill" directory
+    done
+    link_path git/.gitconfig_shared "$HOME/.gitconfig_shared"
+    link_path homebrew/.Brewfile "$HOME/.Brewfile"
+    link_path mise/config.toml "${XDG_CONFIG_HOME:-$HOME/.config}/mise/config.toml"
+    link_path vim/.vimrc "$HOME/.vimrc"
+    link_path vscode/settings.json "$code_user/settings.json"
+    link_path zsh/.zprofile "$HOME/.zprofile"
+    link_path zsh/.zshrc "$HOME/.zshrc"
     if [[ $phase == check ]]; then
         python3 "$repo/scripts/git-config.py" --check
     fi

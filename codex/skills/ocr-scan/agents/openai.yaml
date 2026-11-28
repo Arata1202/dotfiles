@@ -1,0 +1,4 @@
+interface:
+  display_name: "OCR 全体スキャン"
+  short_description: "OpenCodeReviewでリポジトリ全体をスキャンする。指摘の採否から修正の検収まで対応"
+  default_prompt: "$ocr-scan を使って、このリポジトリ全体をスキャンし、採用した指摘を修正してサブエージェントで検収してください。"

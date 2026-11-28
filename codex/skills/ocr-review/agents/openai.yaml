@@ -1,0 +1,4 @@
+interface:
+  display_name: "OCR 差分レビュー"
+  short_description: "OpenCodeReviewでPR・単一コミット・未コミット差分をレビューする。指摘の採否から修正の検収まで対応"
+  default_prompt: "$ocr-review を使って、このPRの差分をレビューし、採用した指摘を修正してサブエージェントで検収してください。"
